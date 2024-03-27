@@ -20,4 +20,8 @@ spring:
 jwt:
   secret: ${JWT_SECRET}
 
+gauth:
+  clientId: ${GAUTH_CLIENT}
+  clientSecret: ${GAUTH_SECRET}
+  redirectUrl: ${GAUTH_REDIRECT_URL}
 
