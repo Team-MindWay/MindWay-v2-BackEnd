@@ -29,7 +29,6 @@ dependencies {
 
 	// database
 	runtimeOnly("com.mysql:mysql-connector-j")
-	runtimeOnly("org.mariadb.jdbc:mariadb-java-client")
 
 	// GAuth
 	implementation ("com.github.GSM-MSG:GAuth-SDK-Java:v2.0.1")
