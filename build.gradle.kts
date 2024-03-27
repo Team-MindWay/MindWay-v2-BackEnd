@@ -38,6 +38,9 @@ dependencies {
 	implementation ("io.jsonwebtoken:jjwt-impl:0.11.5")
 	implementation ("io.jsonwebtoken:jjwt-jackson:0.11.5")
 
+	//redis
+	implementation ("org.springframework.boot:spring-boot-starter-data-redis:2.3.1.RELEASE")
+
 	implementation("org.springframework.boot:spring-boot-starter-web")
 	compileOnly("org.projectlombok:lombok")
 	annotationProcessor("org.projectlombok:lombok")
