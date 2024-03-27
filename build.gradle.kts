@@ -31,7 +31,7 @@ dependencies {
 	runtimeOnly("com.mysql:mysql-connector-j")
 
 	// GAuth
-	implementation ("com.github.GSM-MSG:GAuth-SDK-Java:v2.0.1")
+	implementation("com.github.GSM-MSG:GAuth-SDK-Java:v2.0.1")
 
 	// jwt
 	implementation ("io.jsonwebtoken:jjwt-api:0.11.5")
