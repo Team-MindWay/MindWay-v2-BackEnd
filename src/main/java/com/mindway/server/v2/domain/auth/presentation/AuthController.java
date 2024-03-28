@@ -20,7 +20,8 @@ public class AuthController {
 
     @PostMapping("/signin")
     public ResponseEntity<TokenResponse> signIn(@RequestBody @Valid SignInRequest signInRequest) {
-        return ResponseEntity.ok(signInService.execute(signInRequest));
+        TokenResponse response = signInService.execute(signInRequest);
+        return ResponseEntity.ok(response);
     }
 
 }
