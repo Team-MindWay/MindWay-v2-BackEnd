@@ -45,7 +45,7 @@ public class SecurityConfig {
                         authorizeRequests
                                 .requestMatchers(CorsUtils::isPreFlightRequest).permitAll()
                                 .requestMatchers(HttpMethod.POST, "/api/v2/auth/signin").permitAll()
-                                .anyRequest().authenticated()
+                                .anyRequest().permitAll()
                 )
 
                 .addFilterBefore(new JwtFilter(jwtProvider), UsernamePasswordAuthenticationFilter.class);
