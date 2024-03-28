@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 @RestControllerAdvice
 public class GlobalExceptionHandler {
-    @ExceptionHandler(GlobalException.class)
-    public ResponseEntity<ErrorResponse> handler(GlobalException e) {
+    @ExceptionHandler(MindWayException.class)
+    public ResponseEntity<ErrorResponse> handler(MindWayException e) {
         ErrorCode errorCode = e.getErrorCode();
         ErrorResponse response = ErrorResponse.builder()
                 .status(errorCode.getStatus())
