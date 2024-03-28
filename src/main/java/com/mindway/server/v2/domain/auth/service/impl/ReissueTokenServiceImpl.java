@@ -17,7 +17,6 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @Transactional(rollbackFor = {Exception.class})
 @RequiredArgsConstructor
-@Slf4j
 public class ReissueTokenServiceImpl implements ReissueTokenService {
 
     private final JwtProvider jwtProvider;
@@ -26,7 +25,7 @@ public class ReissueTokenServiceImpl implements ReissueTokenService {
 
     public TokenResponse execute(String refreshToken) {
         String parseRefreshToken = jwtProvider.parseRefreshToken(refreshToken);
-        log.info(refreshToken);
+
         RefreshToken refreshEntity = refreshRepository.findById(parseRefreshToken)
                 .orElseThrow(ExpiredRefreshTokenException::new);
 
