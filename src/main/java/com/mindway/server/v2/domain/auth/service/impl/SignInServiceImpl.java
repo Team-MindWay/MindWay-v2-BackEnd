@@ -14,7 +14,6 @@ import gauth.GAuthToken;
 import gauth.GAuthUserInfo;
 import gauth.exception.GAuthException;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -31,11 +30,11 @@ public class SignInServiceImpl implements SignInService {
     private final MemberRepository memberRepository;
     private final JwtProvider jwtProvider;
 
-    @Value("gauth.clientId")
+    @Value("${gauth.clientId}")
     private String clientId;
-    @Value("gauth.clientSecret")
+    @Value("${gauth.clientSecret}")
     private String clientSecret;
-    @Value("gauth.redirectUri")
+    @Value("${gauth.redirectUri}")
     private String redirectUri;
 
     public TokenResponse execute(SignInRequest signInRequest) throws GAuthException{
