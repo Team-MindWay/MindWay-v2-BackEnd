@@ -24,7 +24,6 @@ import java.io.IOException;
 @Service
 @Transactional(rollbackFor = {Exception.class})
 @RequiredArgsConstructor
-@Slf4j
 public class SignInServiceImpl implements SignInService {
 
     private final GAuth gAuth;
