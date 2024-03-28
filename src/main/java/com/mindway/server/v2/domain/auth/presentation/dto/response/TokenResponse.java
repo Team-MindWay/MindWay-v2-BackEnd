@@ -1,5 +1,6 @@
 package com.mindway.server.v2.domain.auth.presentation.dto.response;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -16,6 +17,8 @@ public class TokenResponse {
     private String grantType;
     private String accessToken;
     private String refreshToken;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss")
     private LocalDateTime accessTokenExpiresIn;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss")
     private LocalDateTime refreshTokenExpiresIn;
 }
