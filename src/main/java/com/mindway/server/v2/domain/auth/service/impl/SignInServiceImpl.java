@@ -48,7 +48,7 @@ public class SignInServiceImpl implements SignInService {
             GAuthUserInfo userInfo = gAuth.getUserInfo(gAuthToken.getAccessToken());
 
             Member member = memberRepository.findByEmail(userInfo.getEmail())
-                    .orElse(saveMember(userInfo));
+                    .orElseGet(() -> saveMember(userInfo));
 
             TokenResponse tokenResponse = jwtProvider.generateTokenDto(member.getId());
 
