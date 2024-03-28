@@ -23,6 +23,7 @@ import java.io.IOException;
 
 @Service
 @RequiredArgsConstructor
+@Transactional(rollbackFor = {Exception.class})
 @Slf4j
 public class SignInServiceImpl implements SignInService {
 
@@ -38,7 +39,6 @@ public class SignInServiceImpl implements SignInService {
     @Value("${gauth.redirectUri}")
     private String redirectUri;
 
-    @Transactional(rollbackFor = {Exception.class})
     public TokenResponse execute(SignInRequest signInRequest) throws GAuthException{
         try {
             GAuthToken gAuthToken = gAuth.generateToken(
