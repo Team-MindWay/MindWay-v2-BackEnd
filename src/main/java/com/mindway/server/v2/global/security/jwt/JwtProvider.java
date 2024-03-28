@@ -1,5 +1,6 @@
 package com.mindway.server.v2.global.security.jwt;
 
+import com.mindway.server.v2.domain.auth.presentation.dto.response.TokenResponse;
 import com.mindway.server.v2.global.auth.AuthDetailsService;
 import com.mindway.server.v2.global.exception.ErrorCode;
 import com.mindway.server.v2.global.exception.GlobalException;
@@ -20,6 +21,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
 import java.security.Key;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.UUID;
 
@@ -31,8 +33,8 @@ import static com.mindway.server.v2.global.security.filter.JwtFilter.BEARER_PREF
 @RequiredArgsConstructor
 public class JwtProvider {
     private static final String AUTHORITIES_KEY = "auth";
-    private static final long ACCESS_TOKEN_TIME = 1000 * 60 * 30;
-    private static final long REFRESH_TOKEN_TIME = 1000 * 60 * 60 * 24 * 7;
+    private static final long ACCESS_TOKEN_TIME = 1000 * 60 * 30L;
+    private static final long REFRESH_TOKEN_TIME = 1000 * 60 * 60 * 24 * 7L;
 
     @Value("${jwt.secret}")
     private String secretKey;
@@ -45,6 +47,15 @@ public class JwtProvider {
         key = Keys.hmacShaKeyFor(keyBytes);
     }
 
+    public TokenResponse generateTokenDto(UUID id) {
+        return TokenResponse.builder()
+                .grantType(BEARER_PREFIX)
+                .accessToken(generateAccessToken(id))
+                .refreshToken(generateRefreshToken(id))
+                .accessTokenExpiresIn(LocalDateTime.now().plusSeconds(ACCESS_TOKEN_TIME))
+                .refreshTokenExpiresIn(LocalDateTime.now().plusSeconds(REFRESH_TOKEN_TIME))
+                .build();
+    }
 
     public boolean validateToken(String token) {
         try {

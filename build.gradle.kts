@@ -31,14 +31,18 @@ dependencies {
 	runtimeOnly("com.mysql:mysql-connector-j")
 
 	// GAuth
-	implementation ("com.github.GSM-MSG:GAuth-SDK-Java:v2.0.1")
+	implementation("com.github.GSM-MSG:GAuth-SDK-Java:v2.0.1")
 
 	// jwt
-	implementation ("io.jsonwebtoken:jjwt-api:0.11.5")
-	implementation ("io.jsonwebtoken:jjwt-impl:0.11.5")
-	implementation ("io.jsonwebtoken:jjwt-jackson:0.11.5")
+	implementation("io.jsonwebtoken:jjwt-api:0.11.5")
+	implementation("io.jsonwebtoken:jjwt-impl:0.11.5")
+	implementation("io.jsonwebtoken:jjwt-jackson:0.11.5")
+
+	//redis
+	implementation ("org.springframework.boot:spring-boot-starter-data-redis:2.3.1.RELEASE")
 
 	implementation("org.springframework.boot:spring-boot-starter-web")
+	implementation("org.springframework.boot:spring-boot-starter-validation:3.2.0")
 	compileOnly("org.projectlombok:lombok")
 	annotationProcessor("org.projectlombok:lombok")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
