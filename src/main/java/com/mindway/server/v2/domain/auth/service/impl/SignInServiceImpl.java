@@ -14,6 +14,7 @@ import gauth.GAuthToken;
 import gauth.GAuthUserInfo;
 import gauth.exception.GAuthException;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,8 +22,8 @@ import org.springframework.transaction.annotation.Transactional;
 import java.io.IOException;
 
 @Service
-@Transactional(rollbackFor = {Exception.class})
 @RequiredArgsConstructor
+@Slf4j
 public class SignInServiceImpl implements SignInService {
 
     private final GAuth gAuth;
@@ -37,6 +38,7 @@ public class SignInServiceImpl implements SignInService {
     @Value("${gauth.redirectUri}")
     private String redirectUri;
 
+    @Transactional(rollbackFor = {Exception.class})
     public TokenResponse execute(SignInRequest signInRequest) throws GAuthException{
         try {
             GAuthToken gAuthToken = gAuth.generateToken(
@@ -59,6 +61,7 @@ public class SignInServiceImpl implements SignInService {
         } catch (GAuthException e) {
             throw new GAuthException(e.getCode());
         } catch (IOException e) {
+            log.info(e.getMessage());
         }
 
         return null;
