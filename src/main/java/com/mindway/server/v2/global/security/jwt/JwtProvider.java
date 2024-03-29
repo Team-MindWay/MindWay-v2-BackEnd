@@ -3,7 +3,7 @@ package com.mindway.server.v2.global.security.jwt;
 import com.mindway.server.v2.domain.auth.presentation.dto.response.TokenResponse;
 import com.mindway.server.v2.global.auth.AuthDetailsService;
 import com.mindway.server.v2.global.exception.ErrorCode;
-import com.mindway.server.v2.global.exception.GlobalException;
+import com.mindway.server.v2.global.exception.MindWayException;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
@@ -33,6 +33,7 @@ import static com.mindway.server.v2.global.security.filter.JwtFilter.BEARER_PREF
 @RequiredArgsConstructor
 public class JwtProvider {
     private static final String AUTHORITIES_KEY = "auth";
+    private static final String BEARER_TYPE = "Bearer ";
     private static final long ACCESS_TOKEN_TIME = 1000 * 60 * 30L;
     private static final long REFRESH_TOKEN_TIME = 1000 * 60 * 60 * 24 * 7L;
 
@@ -63,9 +64,9 @@ public class JwtProvider {
 
             return true;
         } catch (ExpiredJwtException e) {
-            throw new GlobalException(ErrorCode.EXPIRED_TOKEN);
+            throw new MindWayException(ErrorCode.EXPIRED_TOKEN);
         } catch (Exception e) {
-            throw new GlobalException(ErrorCode.INVALID_TOKEN_TYPE);
+            throw new MindWayException(ErrorCode.INVALID_TOKEN_TYPE);
 
         }
     }
@@ -75,7 +76,7 @@ public class JwtProvider {
         Claims claims = parseClaims(accessToken);
 
         if (claims.get(AUTHORITIES_KEY) == null) {
-            throw new GlobalException(ErrorCode.INVALID_TOKEN);
+            throw new MindWayException(ErrorCode.INVALID_TOKEN);
         }
 
         UserDetails principal = authDetailsService.loadUserByUsername(parseClaims(accessToken).getSubject());
@@ -96,6 +97,14 @@ public class JwtProvider {
             return bearerToken.substring(7);
         }
         return null;
+    }
+
+    public String parseRefreshToken(String refreshToken) {
+        if (refreshToken.startsWith(BEARER_TYPE)) {
+            return refreshToken.replace(BEARER_TYPE, "");
+        } else {
+            return null;
+        }
     }
 
     public String generateAccessToken(UUID id) {
