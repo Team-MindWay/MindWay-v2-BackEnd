@@ -11,14 +11,14 @@ import org.springframework.http.HttpStatus;
 public enum ErrorCode {
 
     /* Token */
-    EXPIRED_TOKEN(HttpStatus.UNAUTHORIZED, "토큰이 만료되었습니다."),
-    INVALID_TOKEN_TYPE(HttpStatus.UNAUTHORIZED, "유효하지 않은 토큰 타입입니다."),
-    INVALID_TOKEN(HttpStatus.UNAUTHORIZED, "유효하지 않은 토큰입니다."),
-    EXPIRED_REFRESH_TOKEN(HttpStatus.UNAUTHORIZED, "만료된 리프레쉬 토큰입니다."),
+    EXPIRED_TOKEN(401, "토큰이 만료되었습니다."),
+    INVALID_TOKEN_TYPE(401, "유효하지 않은 토큰 타입입니다."),
+    INVALID_TOKEN(401, "유효하지 않은 토큰입니다."),
+    EXPIRED_REFRESH_TOKEN(401, "만료된 리프레쉬 토큰입니다."),
 
     /* Member */
-    MEMBER_NOT_FOUND(HttpStatus.NOT_FOUND, "Member Not Found");
+    MEMBER_NOT_FOUND(404, "Member Not Found");
 
-    private final HttpStatus status;
+    private final int status;
     private final String message;
 }
