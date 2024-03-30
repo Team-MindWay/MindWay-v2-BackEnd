@@ -6,8 +6,6 @@ import com.mindway.server.v2.domain.auth.repository.RefreshRepository;
 import com.mindway.server.v2.domain.auth.service.LogoutService;
 import com.mindway.server.v2.domain.member.entity.Member;
 import com.mindway.server.v2.domain.member.util.MemberUtil;
-import com.mindway.server.v2.global.auth.AuthDetailsService;
-import com.mindway.server.v2.global.security.jwt.JwtProvider;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -27,7 +25,6 @@ public class LogoutServiceImpl implements LogoutService {
                 .orElseThrow(ExpiredRefreshTokenException::new);
 
         refreshRepository.deleteById(validRefreshToken.getRefreshToken());
-
     }
 
 }
