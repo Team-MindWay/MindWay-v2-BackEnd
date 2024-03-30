@@ -1,14 +1,8 @@
 package com.mindway.server.v2.global.exception;
 
-import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
-import org.springframework.http.HttpStatus;
 
-@Getter
 @Builder
-@AllArgsConstructor
-public class ErrorResponse {
-    private final HttpStatus status;
-    private final String message;
+public record ErrorResponse(int status, String message) {
 }

@@ -72,14 +72,13 @@ public class JwtProvider {
     }
 
     public Authentication getAuthentication(String accessToken) {
-
         Claims claims = parseClaims(accessToken);
 
         if (claims.get(AUTHORITIES_KEY) == null) {
             throw new MindWayException(ErrorCode.INVALID_TOKEN);
         }
 
-        UserDetails principal = authDetailsService.loadUserByUsername(parseClaims(accessToken).getSubject());
+        UserDetails principal = authDetailsService.loadUserByUsername(claims.getSubject());
         return new UsernamePasswordAuthenticationToken(principal, "", principal.getAuthorities());
     }
 
@@ -114,6 +113,7 @@ public class JwtProvider {
 
         return Jwts.builder()
                 .setSubject(id.toString())
+                .claim(AUTHORITIES_KEY, "JWT")
                 .setIssuedAt(new Date())
                 .setExpiration(accessTokenExpiresIn)
                 .signWith(key, SignatureAlgorithm.HS256)
