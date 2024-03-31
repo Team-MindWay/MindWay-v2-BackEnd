@@ -27,7 +27,6 @@ public class Member {
     @Embedded
     private StudentNum studentNum;
 
-    @Enumerated(EnumType.STRING)
-    private Authority authority;
+    private String role;
 
 }

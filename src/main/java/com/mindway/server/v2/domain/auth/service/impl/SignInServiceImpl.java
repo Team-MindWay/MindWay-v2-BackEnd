@@ -20,6 +20,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.io.IOException;
+import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
@@ -69,9 +70,11 @@ public class SignInServiceImpl implements SignInService {
 
     private Member saveMember(GAuthUserInfo gAuthUserInfo) {
         Member member = Member.builder()
+                .id(UUID.randomUUID())
                 .email(gAuthUserInfo.getEmail())
                 .name(gAuthUserInfo.getName())
                 .studentNum(new StudentNum(gAuthUserInfo.getGrade(), gAuthUserInfo.getClassNum(), gAuthUserInfo.getNum()))
+                .role(gAuthUserInfo.getRole())
                 .build();
 
         memberRepository.save(member);
