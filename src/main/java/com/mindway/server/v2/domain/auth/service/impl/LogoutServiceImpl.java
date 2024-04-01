@@ -19,7 +19,7 @@ public class LogoutServiceImpl implements LogoutService {
     private final UserUtil userUtil;
 
     public void execute() {
-        User user = userUtil.getCurrentMember();
+        User user = userUtil.getCurrentUser();
 
         RefreshToken validRefreshToken = refreshRepository.findByMemberId(user.getId())
                 .orElseThrow(ExpiredRefreshTokenException::new);
