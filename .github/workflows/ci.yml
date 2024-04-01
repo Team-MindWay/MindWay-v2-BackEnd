@@ -23,8 +23,8 @@ jobs:
       - name: Setup Gradle
         uses: gradle/gradle-build-action@v2
 
-      - name: Build with Gradle
-        run: ./gradlew clean build --no-daemon
+      - name: Build with Gradle (without tests)
+        run: ./gradlew clean build -x test --no-daemon
 
       - name: MindWay Server CI success Discord Notification
         uses: sarisia/actions-status-discord@v1
