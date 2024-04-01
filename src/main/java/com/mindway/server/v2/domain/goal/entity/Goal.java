@@ -1,5 +1,6 @@
 package com.mindway.server.v2.domain.goal.entity;
 
+import com.mindway.server.v2.domain.user.entity.User;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -24,4 +25,8 @@ public class Goal {
     private LocalDate ended_at;
 
     private Long goal_count;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 }
