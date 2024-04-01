@@ -17,19 +17,15 @@ public class User {
 
     @Id
     @GeneratedValue(generator = "UUID4")
-    @Column(name = "user_id")
     private UUID id;
 
-    @Column(name = "user_email")
     private String email;
 
-    @Column(name = "user_name")
     private String name;
 
     @Embedded
     private StudentNum studentNum;
 
-    @Column(name = "user_role")
     private String role;
 
 }
