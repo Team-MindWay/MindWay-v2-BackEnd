@@ -4,45 +4,44 @@ on:
   push:
     branches: [ "main" ]
   pull_request:
-    branches: [ "*" ]
-
-permissions: write-all
+    branches: [ "main" ]
 
 jobs:
-  build:
+  CI:
     runs-on: ubuntu-latest
 
-    services:
-      mysql:
-        image: mysql:8.0
-        env:
-          MYSQL_ROOT_PASSWORD: ${{ secrets.MYSQL_PASSWORD }}
-          MYSQL_DATABASE: ${{ secrets.MYSQL_DB }}
-        ports:
-          - 3306:3306
-
     steps:
-      - uses: actions/checkout@v3
-      - name: Set up JDK 11
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Set up JDK 17
         uses: actions/setup-java@v3
         with:
-          java-version: '11'
+          java-version: '17'
           distribution: 'temurin'
+          cache: gradle
 
-      - name: Start Redis
-        uses: supercharge/redis-github-action@1.4.0
-        with:
-          redis-version: 7
-          redis-port: 6379
+      - name: Setup Gradle
+        uses: gradle/gradle-build-action@v2
 
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
 
-      - name: Create application.yml
-        run: |
-          rm ./src/main/resources/application.yml
-          echo "${{ secrets.APPLICATION_YML }}" > ./src/main/resources/application.yml
-        shell: bash
-
       - name: Build with Gradle
-        run: ./gradlew clean build -x test
+        run: ./gradlew clean build --no-daemon
+
+      - name: MindWay Server CI success Discord Notification
+        uses: sarisia/actions-status-discord@v1
+        if: ${{ success() }}
+        with:
+          title: ✅ MindWay Server CI success ✅
+          webhook: ${{ secrets.DISCORD_WEBHOOK_BOT }}
+          color: 00FF00
+
+      - name: MindWay Server CI failed Discord Notification
+        uses: sarisia/actions-status-discord@v1
+        if: ${{ failure() }}
+        with:
+          title: ❌ MindWay Server CI failed ❌
+          webhook: ${{ secrets.DISCORD_WEBHOOK_BOT }}
+          color: FF0000
