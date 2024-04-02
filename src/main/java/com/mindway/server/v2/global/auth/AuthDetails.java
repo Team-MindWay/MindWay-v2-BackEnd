@@ -1,6 +1,6 @@
 package com.mindway.server.v2.global.auth;
 
-import com.mindway.server.v2.domain.member.entity.Member;
+import com.mindway.server.v2.domain.user.entity.User;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -9,7 +9,7 @@ import java.util.Collection;
 
 @AllArgsConstructor
 public class AuthDetails implements UserDetails {
-    private Member member;
+    private User user;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -23,7 +23,7 @@ public class AuthDetails implements UserDetails {
 
     @Override
     public String getUsername() {
-        return member.getEmail();
+        return user.getEmail();
     }
 
     @Override

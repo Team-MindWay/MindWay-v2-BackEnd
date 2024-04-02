@@ -1,4 +1,4 @@
-package com.mindway.server.v2.domain.member.entity;
+package com.mindway.server.v2.domain.user.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -13,11 +13,10 @@ import java.util.UUID;
 @AllArgsConstructor
 @Getter
 @Builder
-public class Member {
+public class User {
 
     @Id
     @GeneratedValue(generator = "UUID4")
-    @Column(name = "member_id")
     private UUID id;
 
     private String email;

@@ -1,6 +1,6 @@
 package com.mindway.server.v2.global.auth;
 
-import com.mindway.server.v2.domain.member.repository.MemberRepository;
+import com.mindway.server.v2.domain.user.repository.UserRepository;
 import com.mindway.server.v2.global.exception.ErrorCode;
 import com.mindway.server.v2.global.exception.MindWayException;
 import lombok.RequiredArgsConstructor;
@@ -16,11 +16,11 @@ import java.util.UUID;
 @RequiredArgsConstructor
 @Slf4j
 public class AuthDetailsService implements UserDetailsService {
-    private final MemberRepository memberRepository;
+    private final UserRepository userRepository;
 
     @Override
     public UserDetails loadUserByUsername(String id) throws UsernameNotFoundException {
-        return memberRepository.findById(UUID.fromString(id))
+        return userRepository.findById(UUID.fromString(id))
                 .map(AuthDetails::new)
                 .orElseThrow(() -> new MindWayException(ErrorCode.MEMBER_NOT_FOUND));
     }

@@ -1,4 +1,4 @@
-package com.mindway.server.v2.domain.member.entity;
+package com.mindway.server.v2.domain.user.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;

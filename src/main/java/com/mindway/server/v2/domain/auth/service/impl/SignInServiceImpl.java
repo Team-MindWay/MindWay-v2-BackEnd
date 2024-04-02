@@ -5,9 +5,9 @@ import com.mindway.server.v2.domain.auth.presentation.dto.request.SignInRequest;
 import com.mindway.server.v2.domain.auth.presentation.dto.response.TokenResponse;
 import com.mindway.server.v2.domain.auth.repository.RefreshRepository;
 import com.mindway.server.v2.domain.auth.service.SignInService;
-import com.mindway.server.v2.domain.member.entity.Member;
-import com.mindway.server.v2.domain.member.entity.StudentNum;
-import com.mindway.server.v2.domain.member.repository.MemberRepository;
+import com.mindway.server.v2.domain.user.entity.User;
+import com.mindway.server.v2.domain.user.entity.StudentNum;
+import com.mindway.server.v2.domain.user.repository.UserRepository;
 import com.mindway.server.v2.global.security.jwt.JwtProvider;
 import gauth.GAuth;
 import gauth.GAuthToken;
@@ -30,7 +30,7 @@ public class SignInServiceImpl implements SignInService {
 
     private final GAuth gAuth;
     private final RefreshRepository refreshRepository;
-    private final MemberRepository memberRepository;
+    private final UserRepository userRepository;
     private final JwtProvider jwtProvider;
 
     @Value("${gauth.clientId}")
@@ -50,12 +50,12 @@ public class SignInServiceImpl implements SignInService {
             );
             GAuthUserInfo userInfo = gAuth.getUserInfo(gAuthToken.getAccessToken());
 
-            Member member = memberRepository.findByEmail(userInfo.getEmail())
+            User user = userRepository.findByEmail(userInfo.getEmail())
                     .orElseGet(() -> saveMember(userInfo));
 
-            TokenResponse tokenResponse = jwtProvider.generateTokenDto(member.getId());
+            TokenResponse tokenResponse = jwtProvider.generateTokenDto(user.getId());
 
-            saveRefreshToken(tokenResponse, member);
+            saveRefreshToken(tokenResponse, user);
 
             return tokenResponse;
 
@@ -68,8 +68,8 @@ public class SignInServiceImpl implements SignInService {
         return null;
     }
 
-    private Member saveMember(GAuthUserInfo gAuthUserInfo) {
-        Member member = Member.builder()
+    private User saveMember(GAuthUserInfo gAuthUserInfo) {
+        User user = User.builder()
                 .id(UUID.randomUUID())
                 .email(gAuthUserInfo.getEmail())
                 .name(gAuthUserInfo.getName())
@@ -77,15 +77,15 @@ public class SignInServiceImpl implements SignInService {
                 .role(gAuthUserInfo.getRole())
                 .build();
 
-        memberRepository.save(member);
+        userRepository.save(user);
 
-        return member;
+        return user;
     }
 
-    private void saveRefreshToken(TokenResponse tokenResponse, Member member) {
+    private void saveRefreshToken(TokenResponse tokenResponse, User user) {
         RefreshToken refreshToken = RefreshToken.builder()
                 .refreshToken(tokenResponse.getRefreshToken())
-                .memberId(member.getId())
+                .memberId(user.getId())
                 .expiredAt(tokenResponse.getRefreshTokenExpiresIn())
                 .build();
 
