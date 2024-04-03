@@ -74,7 +74,7 @@ public class SignInServiceImpl implements SignInService {
                 .email(gAuthUserInfo.getEmail())
                 .name(gAuthUserInfo.getName())
                 .studentNum(new StudentNum(gAuthUserInfo.getGrade(), gAuthUserInfo.getClassNum(), gAuthUserInfo.getNum()))
-                .role(gAuthUserInfo.getRole())
+                .gauth_role(gAuthUserInfo.getRole())
                 .build();
 
         userRepository.save(user);
