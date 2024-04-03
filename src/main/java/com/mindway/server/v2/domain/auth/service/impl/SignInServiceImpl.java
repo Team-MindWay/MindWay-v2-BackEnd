@@ -5,6 +5,7 @@ import com.mindway.server.v2.domain.auth.presentation.dto.request.SignInRequest;
 import com.mindway.server.v2.domain.auth.presentation.dto.response.TokenResponse;
 import com.mindway.server.v2.domain.auth.repository.RefreshRepository;
 import com.mindway.server.v2.domain.auth.service.SignInService;
+import com.mindway.server.v2.domain.user.entity.Authority;
 import com.mindway.server.v2.domain.user.entity.User;
 import com.mindway.server.v2.domain.user.entity.StudentNum;
 import com.mindway.server.v2.domain.user.repository.UserRepository;
@@ -51,7 +52,7 @@ public class SignInServiceImpl implements SignInService {
             GAuthUserInfo userInfo = gAuth.getUserInfo(gAuthToken.getAccessToken());
 
             User user = userRepository.findByEmail(userInfo.getEmail())
-                    .orElseGet(() -> saveMember(userInfo));
+                    .orElseGet(() -> saveUser(userInfo));
 
             TokenResponse tokenResponse = jwtProvider.generateTokenDto(user.getId());
 
@@ -68,13 +69,14 @@ public class SignInServiceImpl implements SignInService {
         return null;
     }
 
-    private User saveMember(GAuthUserInfo gAuthUserInfo) {
+    private User saveUser(GAuthUserInfo gAuthUserInfo) {
         User user = User.builder()
                 .id(UUID.randomUUID())
                 .email(gAuthUserInfo.getEmail())
                 .name(gAuthUserInfo.getName())
                 .studentNum(new StudentNum(gAuthUserInfo.getGrade(), gAuthUserInfo.getClassNum(), gAuthUserInfo.getNum()))
-                .role(gAuthUserInfo.getRole())
+                .gauth_role(gAuthUserInfo.getRole())
+                .authority(Authority.ROLE_STUDENT)
                 .build();
 
         userRepository.save(user);
