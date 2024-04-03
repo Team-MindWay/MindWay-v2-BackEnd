@@ -28,4 +28,7 @@ public class User {
 
     private String gauth_role;
 
+    @Enumerated(EnumType.STRING)
+    private Authority authority;
+
 }
