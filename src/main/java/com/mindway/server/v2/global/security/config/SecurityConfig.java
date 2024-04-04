@@ -44,8 +44,16 @@ public class SecurityConfig {
                 .authorizeHttpRequests((authorizeRequests) ->
                         authorizeRequests
                                 .requestMatchers(CorsUtils::isPreFlightRequest).permitAll()
+
+                                // auth
                                 .requestMatchers(HttpMethod.POST, "/api/v2/auth/signin").permitAll()
-                                .anyRequest().permitAll()
+                                .requestMatchers(HttpMethod.PATCH, "/api/v2/auth").permitAll()
+                                .requestMatchers(HttpMethod.DELETE, "/api/v2/auth").permitAll()
+
+                                // user
+                                .requestMatchers(HttpMethod.GET, "/api/v2/my").authenticated()
+
+                                .anyRequest().authenticated()
                 )
 
                 .addFilterBefore(new JwtFilter(jwtProvider), UsernamePasswordAuthenticationFilter.class);
