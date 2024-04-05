@@ -5,6 +5,7 @@ import com.mindway.server.v2.domain.order.presentation.dto.request.OrderRequest;
 import com.mindway.server.v2.domain.order.service.BookRequestService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,7 +19,7 @@ public class OrdersController {
     public ResponseEntity<Void> bookRequest
             (@RequestParam BookType type, @RequestBody @Valid OrderRequest bookRequest) {
         bookRequestService.execute(type, bookRequest);
-        return ResponseEntity.ok().build();
+        return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
 }
