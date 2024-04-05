@@ -53,6 +53,9 @@ public class SecurityConfig {
                                 // user
                                 .requestMatchers(HttpMethod.GET, "/api/v2/my").authenticated()
 
+                                // orders
+                                .requestMatchers(HttpMethod.POST, "/api/v2/order").authenticated()
+
                                 .anyRequest().authenticated()
                 )
 
