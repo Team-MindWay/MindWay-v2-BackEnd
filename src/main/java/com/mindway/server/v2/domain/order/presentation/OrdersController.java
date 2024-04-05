@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 public class OrdersController {
     private final BookRequestService bookRequestService;
 
-    @PostMapping("/list")
+    @PostMapping()
     public ResponseEntity<Void> bookRequest
             (@RequestParam BookType type, @RequestBody @Valid OrderRequest bookRequest) {
         bookRequestService.execute(type, bookRequest);
