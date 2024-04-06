@@ -1,5 +1,6 @@
 package com.mindway.server.v2.domain.order.entity;
 
+import com.mindway.server.v2.domain.order.presentation.dto.request.OrderUpdateRequest;
 import com.mindway.server.v2.domain.user.entity.User;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -30,4 +31,9 @@ public class Orders {
     @JoinColumn(name = "user_id")
     private User user;
 
+    public void updateOrder (OrderUpdateRequest orderUpdate) {
+        this.title = orderUpdate.getTitle();
+        this.author = orderUpdate.getAuthor();
+        this.bookURL = orderUpdate.getBook_url();
+    }
 }

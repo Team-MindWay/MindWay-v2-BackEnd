@@ -1,12 +1,10 @@
 package com.mindway.server.v2.domain.order.presentation.dto.request;
 
 import jakarta.validation.constraints.NotBlank;
-import lombok.Builder;
 import lombok.Getter;
 
-@Builder
 @Getter
-public class OrderRequest {
+public class OrderUpdateRequest {
     @NotBlank
     private String title;
 
