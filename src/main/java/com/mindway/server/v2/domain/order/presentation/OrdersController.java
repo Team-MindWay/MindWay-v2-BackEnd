@@ -25,8 +25,8 @@ public class OrdersController {
     }
 
     @DeleteMapping("/{order_id}")
-    public ResponseEntity<Void> deleteBook (@PathVariable Long order_id) {
-        deleteBookOrderService.execute(order_id);
+    public ResponseEntity<Void> deleteBook (@PathVariable(value = "order_id") Long id) {
+        deleteBookOrderService.execute(id);
         return ResponseEntity.noContent().build();
     }
 
