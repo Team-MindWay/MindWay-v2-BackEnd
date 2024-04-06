@@ -26,7 +26,8 @@ public class DeleteBookOrderServiceImpl implements DeleteBookOrderService {
         Orders order = ordersRepository.findById(id)
                 .orElseThrow(NotFoundOrderException::new);
 
-        if (user.getAuthority() != Authority.ROLE_TEACHER) {
+        if (user.getAuthority() != Authority.ROLE_TEACHER
+                && user.getAuthority() != Authority.ROLE_HELPER) {
             if (user != order.getUser())
                 throw new NotAccessStudentException();
         }
