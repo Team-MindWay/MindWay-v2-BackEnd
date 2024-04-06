@@ -2,7 +2,7 @@ package com.mindway.server.v2.domain.order.presentation;
 
 import com.mindway.server.v2.domain.order.entity.BookType;
 import com.mindway.server.v2.domain.order.presentation.dto.request.OrderRequest;
-import com.mindway.server.v2.domain.order.presentation.dto.request.OrderUpdate;
+import com.mindway.server.v2.domain.order.presentation.dto.request.OrderUpdateRequest;
 import com.mindway.server.v2.domain.order.service.BookRequestService;
 import com.mindway.server.v2.domain.order.service.DeleteBookOrderService;
 import com.mindway.server.v2.domain.order.service.UpdateBookOrderService;
@@ -35,7 +35,7 @@ public class OrdersController {
 
     @PatchMapping("/{order_id}")
     public ResponseEntity<Void> updateBook
-            (@PathVariable(value = "order_id") Long id, @RequestBody @Valid OrderUpdate orderUpdate) {
+            (@PathVariable(value = "order_id") Long id, @RequestBody @Valid OrderUpdateRequest orderUpdate) {
         updateBookOrderService.execute(id, orderUpdate);
         return ResponseEntity.noContent().build();
     }

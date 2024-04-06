@@ -3,10 +3,9 @@ package com.mindway.server.v2.domain.order.service.impl;
 import com.mindway.server.v2.domain.order.entity.Orders;
 import com.mindway.server.v2.domain.order.exception.NotAccessStudentException;
 import com.mindway.server.v2.domain.order.exception.NotFoundOrderException;
-import com.mindway.server.v2.domain.order.presentation.dto.request.OrderUpdate;
+import com.mindway.server.v2.domain.order.presentation.dto.request.OrderUpdateRequest;
 import com.mindway.server.v2.domain.order.repository.OrdersRepository;
 import com.mindway.server.v2.domain.order.service.UpdateBookOrderService;
-import com.mindway.server.v2.domain.order.util.OrdersConverter;
 import com.mindway.server.v2.domain.user.entity.User;
 import com.mindway.server.v2.domain.user.util.UserUtil;
 import lombok.RequiredArgsConstructor;
@@ -21,7 +20,7 @@ public class UpdateBookOrderServiceImpl implements UpdateBookOrderService {
     private final OrdersRepository ordersRepository;
 
     @Override
-    public void execute(Long id, OrderUpdate orderUpdate) {
+    public void execute(Long id, OrderUpdateRequest orderUpdate) {
         User user = userUtil.getCurrentUser();
         Orders order = ordersRepository.findById(id)
                 .orElseThrow(NotFoundOrderException::new);
