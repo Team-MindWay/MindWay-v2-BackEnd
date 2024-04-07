@@ -46,7 +46,7 @@ public class OrdersController {
     }
 
     @GetMapping
-    public ResponseEntity<List<OrdersResponse>> bookOrders () {
+    public ResponseEntity<List<OrdersResponse>> getBookOrders () {
         List<OrdersResponse> orders = getBookOrdersService.execute();
         return ResponseEntity.ok(orders);
     }
