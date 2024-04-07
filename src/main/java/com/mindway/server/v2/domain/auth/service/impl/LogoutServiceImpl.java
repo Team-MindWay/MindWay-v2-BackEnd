@@ -6,13 +6,11 @@ import com.mindway.server.v2.domain.auth.repository.RefreshRepository;
 import com.mindway.server.v2.domain.auth.service.LogoutService;
 import com.mindway.server.v2.domain.user.entity.User;
 import com.mindway.server.v2.domain.user.util.UserUtil;
+import com.mindway.server.v2.global.annotation.ServiceWithTransaction;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
-@Service
-@Transactional(rollbackFor = {Exception.class})
 @RequiredArgsConstructor
+@ServiceWithTransaction
 public class LogoutServiceImpl implements LogoutService {
 
     private final RefreshRepository refreshRepository;

@@ -8,13 +8,11 @@ import com.mindway.server.v2.domain.order.repository.OrdersRepository;
 import com.mindway.server.v2.domain.order.service.UpdateBookOrderService;
 import com.mindway.server.v2.domain.user.entity.User;
 import com.mindway.server.v2.domain.user.util.UserUtil;
+import com.mindway.server.v2.global.annotation.ServiceWithTransaction;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
-@Service
 @RequiredArgsConstructor
-@Transactional(rollbackFor = {Exception.class})
+@ServiceWithTransaction
 public class UpdateBookOrderServiceImpl implements UpdateBookOrderService {
     private final UserUtil userUtil;
     private final OrdersRepository ordersRepository;

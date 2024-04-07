@@ -8,13 +8,11 @@ import com.mindway.server.v2.domain.order.service.BookRequestService;
 import com.mindway.server.v2.domain.order.util.OrdersConverter;
 import com.mindway.server.v2.domain.user.entity.User;
 import com.mindway.server.v2.domain.user.util.UserUtil;
+import com.mindway.server.v2.global.annotation.ServiceWithTransaction;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
-@Service
 @RequiredArgsConstructor
-@Transactional(rollbackFor = {Exception.class})
+@ServiceWithTransaction
 public class BookRequestServiceImpl implements BookRequestService {
 
     private final UserUtil userUtil;

@@ -6,16 +6,14 @@ import com.mindway.server.v2.domain.user.entity.User;
 import com.mindway.server.v2.domain.user.presentation.dto.response.MyOrdersResponse;
 import com.mindway.server.v2.domain.user.service.GetMyOrdersService;
 import com.mindway.server.v2.domain.user.util.UserUtil;
+import com.mindway.server.v2.global.annotation.ServiceWithReadOnlyTransaction;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Service
 @RequiredArgsConstructor
-@Transactional(readOnly = true, rollbackFor = {Exception.class})
+@ServiceWithReadOnlyTransaction
 public class GetMyOrdersServiceImpl implements GetMyOrdersService {
 
     private final UserUtil userUtil;

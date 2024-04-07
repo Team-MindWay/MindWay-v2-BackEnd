@@ -4,13 +4,11 @@ import com.mindway.server.v2.domain.user.entity.User;
 import com.mindway.server.v2.domain.user.presentation.dto.response.UserInfoResponse;
 import com.mindway.server.v2.domain.user.service.UserInfoService;
 import com.mindway.server.v2.domain.user.util.UserUtil;
+import com.mindway.server.v2.global.annotation.ServiceWithReadOnlyTransaction;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
-@Service
 @RequiredArgsConstructor
-@Transactional(readOnly = true, rollbackFor = {Exception.class})
+@ServiceWithReadOnlyTransaction
 public class UserInfoServiceImpl implements UserInfoService {
 
     private final UserUtil userUtil;
