@@ -8,16 +8,14 @@ import com.mindway.server.v2.domain.order.util.OrdersConverter;
 import com.mindway.server.v2.domain.user.entity.Authority;
 import com.mindway.server.v2.domain.user.entity.User;
 import com.mindway.server.v2.domain.user.util.UserUtil;
+import com.mindway.server.v2.global.annotation.ServiceWithReadOnlyTransaction;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Service
 @RequiredArgsConstructor
-@Transactional(readOnly = true, rollbackFor = {Exception.class})
+@ServiceWithReadOnlyTransaction
 public class GetBookOrdersServiceImpl implements GetBookOrdersService {
     private final UserUtil userUtil;
     private final OrdersRepository ordersRepository;

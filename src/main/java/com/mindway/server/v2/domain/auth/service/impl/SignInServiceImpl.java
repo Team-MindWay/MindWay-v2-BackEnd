@@ -9,6 +9,7 @@ import com.mindway.server.v2.domain.user.entity.Authority;
 import com.mindway.server.v2.domain.user.entity.User;
 import com.mindway.server.v2.domain.user.entity.StudentNum;
 import com.mindway.server.v2.domain.user.repository.UserRepository;
+import com.mindway.server.v2.global.annotation.ServiceWithTransaction;
 import com.mindway.server.v2.global.security.jwt.JwtProvider;
 import gauth.GAuth;
 import gauth.GAuthToken;
@@ -17,15 +18,12 @@ import gauth.exception.GAuthException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.io.IOException;
 import java.util.UUID;
 
-@Service
 @RequiredArgsConstructor
-@Transactional(rollbackFor = {Exception.class})
+@ServiceWithTransaction
 @Slf4j
 public class SignInServiceImpl implements SignInService {
 
