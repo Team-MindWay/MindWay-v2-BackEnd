@@ -1,6 +1,5 @@
 package com.mindway.server.v2.domain.order.service.impl;
 
-import com.mindway.server.v2.domain.order.entity.Orders;
 import com.mindway.server.v2.domain.order.exception.NotAccessStudentException;
 import com.mindway.server.v2.domain.order.presentation.dto.response.OrdersResponse;
 import com.mindway.server.v2.domain.order.repository.OrdersRepository;
@@ -33,9 +32,7 @@ public class GetBookOrdersServiceImpl implements GetBookOrdersService {
             throw new NotAccessStudentException();
         }
 
-        List<Orders> orders = ordersRepository.findAll();
-
-        return orders.stream()
+        return ordersRepository.findAll().stream()
                 .map(ordersConverter::toDto)
                 .collect(Collectors.toList());
     }
