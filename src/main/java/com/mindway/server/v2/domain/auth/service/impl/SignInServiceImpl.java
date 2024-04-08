@@ -91,6 +91,20 @@ public class SignInServiceImpl implements SignInService {
         return user;
     }
 
+    private User saveTeacher(GAuthUserInfo gAuthUserInfo) {
+        User teacher = User.builder()
+                .id(UUID.randomUUID())
+                .email(gAuthUserInfo.getEmail())
+                .name(gAuthUserInfo.getName())
+                .studentNum(new StudentNum(gAuthUserInfo.getGrade(), gAuthUserInfo.getClassNum(), gAuthUserInfo.getNum()))
+                .authority(Authority.ROLE_TEACHER)
+                .build();
+
+        userRepository.save(teacher);
+
+        return teacher;
+    }
+
     private void saveRefreshToken(TokenResponse tokenResponse, User user) {
         RefreshToken refreshToken = RefreshToken.builder()
                 .refreshToken(tokenResponse.getRefreshToken())
