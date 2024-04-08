@@ -68,6 +68,15 @@ public class SignInServiceImpl implements SignInService {
     }
 
     private User saveUser(GAuthUserInfo gAuthUserInfo) {
+        if (Objects.equals(gAuthUserInfo.getRole(), "ROLE_STUDENT")) {
+            return saveStudent(gAuthUserInfo);
+        } else if (Objects.equals(gAuthUserInfo.getRole(), "ROLE_TEACHER")) {
+            return saveTeacher(gAuthUserInfo);
+        }
+        return null;
+    }
+
+    private User saveStudent(GAuthUserInfo gAuthUserInfo) {
         User user = User.builder()
                 .id(UUID.randomUUID())
                 .email(gAuthUserInfo.getEmail())
