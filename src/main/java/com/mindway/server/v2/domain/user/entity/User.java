@@ -26,8 +26,6 @@ public class User {
     @Embedded
     private StudentNum studentNum;
 
-    private String gauth_role;
-
     @Enumerated(EnumType.STRING)
     private Authority authority;
 
