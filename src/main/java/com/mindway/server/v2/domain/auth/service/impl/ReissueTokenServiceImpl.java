@@ -2,7 +2,7 @@ package com.mindway.server.v2.domain.auth.service.impl;
 
 import com.mindway.server.v2.domain.auth.RefreshToken;
 import com.mindway.server.v2.domain.auth.exception.ExpiredRefreshTokenException;
-import com.mindway.server.v2.domain.auth.exception.MemberNotFoundException;
+import com.mindway.server.v2.domain.auth.exception.UserNotFoundException;
 import com.mindway.server.v2.domain.auth.presentation.dto.response.TokenResponse;
 import com.mindway.server.v2.domain.auth.repository.RefreshRepository;
 import com.mindway.server.v2.domain.auth.service.ReissueTokenService;
@@ -27,7 +27,7 @@ public class ReissueTokenServiceImpl implements ReissueTokenService {
                 .orElseThrow(ExpiredRefreshTokenException::new);
 
         User user = userRepository.findById(refreshEntity.getMemberId())
-                .orElseThrow(MemberNotFoundException::new);
+                .orElseThrow(UserNotFoundException::new);
 
         refreshRepository.deleteById(refreshEntity.getRefreshToken());
 

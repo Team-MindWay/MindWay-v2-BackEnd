@@ -1,6 +1,7 @@
 package com.mindway.server.v2.domain.auth.service.impl;
 
 import com.mindway.server.v2.domain.auth.RefreshToken;
+import com.mindway.server.v2.domain.auth.exception.UserNotFoundException;
 import com.mindway.server.v2.domain.auth.presentation.dto.request.SignInRequest;
 import com.mindway.server.v2.domain.auth.presentation.dto.response.TokenResponse;
 import com.mindway.server.v2.domain.auth.repository.RefreshRepository;
@@ -20,6 +21,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 
 import java.io.IOException;
+import java.util.Objects;
 import java.util.UUID;
 
 @RequiredArgsConstructor
@@ -52,6 +54,9 @@ public class SignInServiceImpl implements SignInService {
             User user = userRepository.findByEmail(userInfo.getEmail())
                     .orElseGet(() -> saveUser(userInfo));
 
+            if (user == null)
+                throw new UserNotFoundException();
+
             TokenResponse tokenResponse = jwtProvider.generateTokenDto(user.getId());
 
             saveRefreshToken(tokenResponse, user);
@@ -68,18 +73,40 @@ public class SignInServiceImpl implements SignInService {
     }
 
     private User saveUser(GAuthUserInfo gAuthUserInfo) {
+        if (Objects.equals(gAuthUserInfo.getRole(), "ROLE_STUDENT")) {
+            return saveStudent(gAuthUserInfo);
+        } else if (Objects.equals(gAuthUserInfo.getRole(), "ROLE_TEACHER")) {
+            return saveTeacher(gAuthUserInfo);
+        }
+        return null;
+    }
+
+    private User saveStudent(GAuthUserInfo gAuthUserInfo) {
         User user = User.builder()
                 .id(UUID.randomUUID())
                 .email(gAuthUserInfo.getEmail())
                 .name(gAuthUserInfo.getName())
                 .studentNum(new StudentNum(gAuthUserInfo.getGrade(), gAuthUserInfo.getClassNum(), gAuthUserInfo.getNum()))
-                .gauth_role(gAuthUserInfo.getRole())
                 .authority(Authority.ROLE_STUDENT)
                 .build();
 
         userRepository.save(user);
 
         return user;
+    }
+
+    private User saveTeacher(GAuthUserInfo gAuthUserInfo) {
+        User teacher = User.builder()
+                .id(UUID.randomUUID())
+                .email(gAuthUserInfo.getEmail())
+                .name(gAuthUserInfo.getName())
+                .studentNum(new StudentNum(gAuthUserInfo.getGrade(), gAuthUserInfo.getClassNum(), gAuthUserInfo.getNum()))
+                .authority(Authority.ROLE_TEACHER)
+                .build();
+
+        userRepository.save(teacher);
+
+        return teacher;
     }
 
     private void saveRefreshToken(TokenResponse tokenResponse, User user) {
