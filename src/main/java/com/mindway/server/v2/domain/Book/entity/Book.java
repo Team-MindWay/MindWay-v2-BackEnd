@@ -1,5 +1,6 @@
 package com.mindway.server.v2.domain.Book.entity;
 
+import com.mindway.server.v2.domain.goal.entity.Goal;
 import com.mindway.server.v2.domain.user.entity.User;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -22,13 +23,13 @@ public class Book {
 
     private String title;
 
-    private String author;
-
-    private String url;
-
-    private LocalDate created_at;
+    private String plot; // 줄거리
 
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
+
+    @ManyToOne
+    @JoinColumn(name = "goal_id")
+    private Goal goal;
 }
