@@ -23,7 +23,7 @@ public class Book {
 
     private String title;
 
-    private String plot; // 줄거리
+    private String plot;
 
     private LocalDate created_at;
 
