@@ -25,6 +25,8 @@ public class Book {
 
     private String plot; // 줄거리
 
+    private LocalDate created_at;
+
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
