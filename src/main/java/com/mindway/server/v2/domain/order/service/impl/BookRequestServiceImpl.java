@@ -1,6 +1,5 @@
 package com.mindway.server.v2.domain.order.service.impl;
 
-import com.mindway.server.v2.domain.order.entity.BookType;
 import com.mindway.server.v2.domain.order.entity.Orders;
 import com.mindway.server.v2.domain.order.presentation.dto.request.OrderRequest;
 import com.mindway.server.v2.domain.order.repository.OrdersRepository;
@@ -19,10 +18,10 @@ public class BookRequestServiceImpl implements BookRequestService {
     private final OrdersRepository ordersRepository;
     private final OrdersConverter ordersConverter;
 
-    public void execute(BookType bookType, OrderRequest bookRequest) {
+    public void execute(OrderRequest bookRequest) {
         User user = userUtil.getCurrentUser();
 
-        Orders order = ordersConverter.toEntity(bookRequest, user, bookType);
+        Orders order = ordersConverter.toEntity(bookRequest, user);
         ordersRepository.save(order);
     }
 }

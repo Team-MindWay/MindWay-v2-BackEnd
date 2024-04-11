@@ -25,8 +25,6 @@ public class Orders {
 
     private String bookURL;
 
-    private BookType bookType;
-
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;
