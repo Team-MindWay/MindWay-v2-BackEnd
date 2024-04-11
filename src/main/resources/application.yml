@@ -6,6 +6,7 @@ spring:
     password: ${DB_PASSWORD}
   jpa:
     hibernate:
+      dialect: org.hibernate.dialect.MariaDBDialect
       ddl-auto: update
     properties:
       hibernate:
