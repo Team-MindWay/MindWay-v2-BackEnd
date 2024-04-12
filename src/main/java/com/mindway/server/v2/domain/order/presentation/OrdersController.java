@@ -1,6 +1,5 @@
 package com.mindway.server.v2.domain.order.presentation;
 
-import com.mindway.server.v2.domain.order.entity.BookType;
 import com.mindway.server.v2.domain.order.presentation.dto.request.OrderRequest;
 import com.mindway.server.v2.domain.order.presentation.dto.request.OrderUpdateRequest;
 import com.mindway.server.v2.domain.order.presentation.dto.response.OrdersResponse;
@@ -25,10 +24,10 @@ public class OrdersController {
     private final UpdateBookOrderService updateBookOrderService;
     private final GetBookOrdersService getBookOrdersService;
 
-    @PostMapping()
+    @PostMapping
     public ResponseEntity<Void> bookRequest
-            (@RequestParam BookType type, @RequestBody @Valid OrderRequest bookRequest) {
-        bookRequestService.execute(type, bookRequest);
+            (@RequestBody @Valid OrderRequest bookRequest) {
+        bookRequestService.execute(bookRequest);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 

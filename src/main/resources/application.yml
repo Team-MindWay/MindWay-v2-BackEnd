@@ -25,4 +25,3 @@ gauth:
   clientId: ${GAUTH_CLIENT}
   clientSecret: ${GAUTH_SECRET}
   redirectUri: ${GAUTH_REDIRECT_URI}
-
