@@ -65,11 +65,8 @@ public class SignInServiceImpl implements SignInService {
 
         } catch (GAuthException e) {
             throw new GAuthException(e.getCode());
-        } catch (IOException e) {
-            log.info(e.getMessage());
         }
 
-        return null;
     }
 
     private User saveUser(GAuthUserInfo gAuthUserInfo) {
