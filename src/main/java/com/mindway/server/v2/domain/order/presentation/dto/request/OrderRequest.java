@@ -14,7 +14,6 @@ public class OrderRequest {
     @NotBlank
     private String author;
 
-    @NotBlank
-    @Pattern(regexp = "^https://www\\.yes24\\.com$", message = "YES24 링크를 입력해주세요")
+    @Pattern(regexp = "^https://www\\.yes24\\.com.*$*", message = "YES24 링크를 입력해주세요")
     private String book_url;
 }
