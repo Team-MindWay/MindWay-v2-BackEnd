@@ -21,7 +21,10 @@ public enum ErrorCode {
 
     /* orders */
     ORDER_NOT_FOUND(404,"해당 도서 신청을 찾을 수 없습니다."),
-    NOT_ACCESS_STUDENT(403,"접근 권한이 없습니다.");
+    NOT_ACCESS_STUDENT(403,"접근 권한이 없습니다."),
+
+    /* goal */
+    EXIST_ALREADY_GOAL(400, "이미 목표 설정이 되어있습니다.");
 
     private final int status;
     private final String message;
