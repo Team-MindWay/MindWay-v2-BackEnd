@@ -11,24 +11,24 @@ import lombok.NoArgsConstructor;
 public class Week {
 
     @Column(length = 3)
-    private Long mon;
+    private Integer mon = 0;
 
     @Column(length = 3)
-    private Long tue;
+    private Integer tue = 0;
 
     @Column(length = 3)
-    private Long wed;
+    private Integer wed = 0;
 
     @Column(length = 3)
-    private Long thu;
+    private Integer thu = 0;
 
     @Column(length = 3)
-    private Long fri;
+    private Integer fri = 0;
 
     @Column(length = 3)
-    private Long sat;
+    private Integer sat = 0;
 
     @Column(length = 3)
-    private Long sun;
+    private Integer sun = 0;
 
 }
