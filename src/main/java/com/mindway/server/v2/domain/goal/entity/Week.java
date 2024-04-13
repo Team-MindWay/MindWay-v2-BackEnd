@@ -3,11 +3,13 @@ package com.mindway.server.v2.domain.goal.entity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
 import jakarta.persistence.MappedSuperclass;
+import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
 @Embeddable
 @MappedSuperclass
 @NoArgsConstructor
+@AllArgsConstructor
 public class Week {
 
     @Column(length = 3)
