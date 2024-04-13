@@ -10,11 +10,11 @@ import java.time.LocalDate;
 @Component
 public class GoalConverterImpl implements GoalConverter {
 
-    public Goal toEntity(User user, String created_at, String ended_at, Long goal_count) {
+    public Goal toEntity(User user, String created_at, String ended_at, Integer goal_count) {
         return Goal.builder()
                 .started_at(LocalDate.parse(created_at))
                 .ended_at(LocalDate.parse(ended_at))
-                .goal_count(goal_count)
+                .goal_value(goal_count)
                 .user(user)
                 .build();
     }
