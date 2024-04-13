@@ -8,5 +8,5 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class GoalAddRequestDto {
     @NotNull
-    private Long goal_count;
+    private Integer goal_count;
 }
