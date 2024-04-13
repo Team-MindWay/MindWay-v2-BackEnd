@@ -1,6 +1,7 @@
 package com.mindway.server.v2.domain.goal.util.impl;
 
 import com.mindway.server.v2.domain.goal.entity.Goal;
+import com.mindway.server.v2.domain.goal.entity.Week;
 import com.mindway.server.v2.domain.goal.util.GoalConverter;
 import com.mindway.server.v2.domain.user.entity.User;
 import org.springframework.stereotype.Component;
@@ -15,6 +16,8 @@ public class GoalConverterImpl implements GoalConverter {
                 .started_at(LocalDate.parse(created_at))
                 .ended_at(LocalDate.parse(ended_at))
                 .goal_value(goal_count)
+                .now_count(0)
+                .week(new Week(0,0,0,0,0,0,0))
                 .user(user)
                 .build();
     }
