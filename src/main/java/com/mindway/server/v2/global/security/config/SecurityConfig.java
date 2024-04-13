@@ -61,6 +61,7 @@ public class SecurityConfig {
 
                                 // goal
                                 .requestMatchers(HttpMethod.POST, "/api/v2/goal").authenticated()
+                                .requestMatchers(HttpMethod.GET, "/api/v2/goal").authenticated()
 
                                 .anyRequest().authenticated()
                 )

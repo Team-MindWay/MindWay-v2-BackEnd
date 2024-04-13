@@ -24,7 +24,8 @@ public enum ErrorCode {
     NOT_ACCESS_STUDENT(403,"접근 권한이 없습니다."),
 
     /* goal */
-    EXIST_ALREADY_GOAL(400, "이미 목표 설정이 되어있습니다.");
+    EXIST_ALREADY_GOAL(400, "이미 목표 설정이 되어있습니다."),
+    NOT_EXIST_GOAL(404, "유저가 설정한 목표가 존재하지 않습니다");
 
     private final int status;
     private final String message;
