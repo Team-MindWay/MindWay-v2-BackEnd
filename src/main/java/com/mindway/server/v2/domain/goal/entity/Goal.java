@@ -24,6 +24,9 @@ public class Goal {
 
     private LocalDate ended_at;
 
+    @Embedded
+    private Week week_count;
+
     private Long goal_count;
 
     @ManyToOne
