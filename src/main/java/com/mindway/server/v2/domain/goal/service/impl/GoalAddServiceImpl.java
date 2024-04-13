@@ -1,17 +1,17 @@
 package com.mindway.server.v2.domain.goal.service.impl;
 
 import com.mindway.server.v2.domain.goal.entity.Goal;
+import com.mindway.server.v2.domain.goal.exception.ExistAlreadyGoalException;
 import com.mindway.server.v2.domain.goal.presentation.dto.request.GoalAddRequestDto;
 import com.mindway.server.v2.domain.goal.repository.GoalRepository;
 import com.mindway.server.v2.domain.goal.service.GoalAddService;
+import com.mindway.server.v2.domain.goal.util.GoalConverter;
 import com.mindway.server.v2.domain.user.entity.User;
 import com.mindway.server.v2.domain.user.util.UserUtil;
 import com.mindway.server.v2.global.annotation.ServiceWithTransaction;
 import lombok.RequiredArgsConstructor;
 
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.util.Date;
+import java.util.Calendar;
 
 @ServiceWithTransaction
 @RequiredArgsConstructor
@@ -19,6 +19,7 @@ public class GoalAddServiceImpl implements GoalAddService {
 
     private final GoalRepository goalRepository;
     private final UserUtil userUtil;
+    private final GoalConverter goalConverter;
 
     public void execute(GoalAddRequestDto goalAddRequestDto) {
         User user = userUtil.getCurrentUser();
@@ -26,16 +27,7 @@ public class GoalAddServiceImpl implements GoalAddService {
         if (goalRepository.existsByUser(user))
             throw new ExistAlreadyGoalException();
 
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        String goalStartedDate = dateFormat.format(now);
-        String goalExpiredDate = dateFormat.format(goalExpired);
-
-        Goal goal = Goal.builder()
-                .started_at(LocalDate.parse(goalStartedDate))
-                .ended_at(LocalDate.parse(goalExpiredDate))
-                .goal_count(goalAddRequestDto.getGoal_count())
-                .user(user)
-                .build();
+        Goal goal = goalConverter.toEntity(user, getCurMonday(), getCurSunday(), goalAddRequestDto.getGoal_count());
 
         goalRepository.save(goal);
     }
