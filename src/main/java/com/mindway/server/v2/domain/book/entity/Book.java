@@ -1,6 +1,5 @@
-package com.mindway.server.v2.domain.Book.entity;
+package com.mindway.server.v2.domain.book.entity;
 
-import com.mindway.server.v2.domain.goal.entity.Goal;
 import com.mindway.server.v2.domain.user.entity.User;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
