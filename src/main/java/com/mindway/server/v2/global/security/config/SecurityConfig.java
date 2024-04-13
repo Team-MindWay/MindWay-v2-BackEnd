@@ -59,6 +59,9 @@ public class SecurityConfig {
                                 .requestMatchers(HttpMethod.PATCH, "api/v2/order/{order_id}").authenticated()
                                 .requestMatchers(HttpMethod.GET, "api/v2/order").authenticated()
 
+                                // goal
+                                .requestMatchers(HttpMethod.POST, "/api/v2/goal").authenticated()
+
                                 .anyRequest().authenticated()
                 )
 
