@@ -25,9 +25,11 @@ public class Goal {
     private LocalDate ended_at;
 
     @Embedded
-    private Week week_count;
+    private Week week;
 
-    private Long goal_count;
+    private Integer now_count;
+
+    private Integer goal_value;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
