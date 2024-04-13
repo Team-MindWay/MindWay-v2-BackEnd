@@ -23,8 +23,8 @@ public class GoalAddServiceImpl implements GoalAddService {
     public void execute(GoalAddRequestDto goalAddRequestDto) {
         User user = userUtil.getCurrentUser();
 
-        long now = new Date().getTime();
-        Date goalExpired = new Date(now + 604800000);
+        if (goalRepository.existsByUser(user))
+            throw new ExistAlreadyGoalException();
 
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         String goalStartedDate = dateFormat.format(now);
