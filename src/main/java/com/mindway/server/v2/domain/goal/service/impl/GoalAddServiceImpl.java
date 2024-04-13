@@ -39,4 +39,21 @@ public class GoalAddServiceImpl implements GoalAddService {
 
         goalRepository.save(goal);
     }
+
+    private String getCurMonday(){
+        java.text.SimpleDateFormat formatter = new java.text.SimpleDateFormat("yyyy-MM-dd");
+        Calendar c = Calendar.getInstance();
+        c.set(Calendar.DAY_OF_WEEK,Calendar.MONDAY);
+        return formatter.format(c.getTime());
+    }
+
+    private String getCurSunday(){
+        java.text.SimpleDateFormat formatter = new java.text.SimpleDateFormat("yyyy-MM-dd");
+        Calendar c = Calendar.getInstance();
+        c.set(Calendar.DAY_OF_WEEK,Calendar.SUNDAY);
+        c.add(c.DATE,7);
+        return formatter.format(c.getTime());
+    }
+
+
 }
