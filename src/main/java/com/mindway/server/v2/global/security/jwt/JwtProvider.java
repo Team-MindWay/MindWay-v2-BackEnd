@@ -50,7 +50,6 @@ public class JwtProvider {
 
     public TokenResponse generateTokenDto(UUID id) {
         return TokenResponse.builder()
-                .grantType(BEARER_PREFIX)
                 .accessToken(generateAccessToken(id))
                 .refreshToken(generateRefreshToken(id))
                 .accessTokenExpiresIn(LocalDateTime.now().plusSeconds(ACCESS_TOKEN_TIME))
