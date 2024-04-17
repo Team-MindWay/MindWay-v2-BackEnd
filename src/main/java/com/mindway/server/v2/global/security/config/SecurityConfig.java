@@ -1,5 +1,6 @@
 package com.mindway.server.v2.global.security.config;
 
+import com.mindway.server.v2.domain.user.entity.Authority;
 import com.mindway.server.v2.global.security.filter.JwtFilter;
 import com.mindway.server.v2.global.security.handler.JwtAccessDeniedHandler;
 import com.mindway.server.v2.global.security.handler.JwtAuthenticationEntryPoint;
@@ -65,6 +66,9 @@ public class SecurityConfig {
 
                                 // book
                                 .requestMatchers(HttpMethod.POST, "/api/v2/book").authenticated()
+
+                                // notice
+                                .requestMatchers(HttpMethod.POST, "/api/v2/notice").hasAnyAuthority(Authority.ROLE_TEACHER.name(), Authority.ROLE_HELPER.name())
 
 
                                 .anyRequest().authenticated()
