@@ -28,7 +28,11 @@ public enum ErrorCode {
     NOT_EXIST_GOAL(404, "유저가 설정한 목표가 존재하지 않습니다"),
 
     /* notice */
-    NOT_FOUND_NOTICE(404, "등록된 공지가 존재하지 않습니다.");
+    NOT_FOUND_NOTICE(404, "등록된 공지가 존재하지 않습니다."),
+
+    /* image */
+    FILE_EXTENSION_INVALID(400, "파일 확장자가 유효하지 않습니다.");
+
 
     private final int status;
     private final String message;
