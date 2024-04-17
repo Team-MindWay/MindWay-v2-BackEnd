@@ -18,7 +18,6 @@ public class BookWriteServiceImpl implements BookWriteService {
     private final BookConverter bookConverter;
     private final UserUtil userUtil;
 
-    @Override
     public void execute(BookWriteRequest bookWriteRequest) {
         User user = userUtil.getCurrentUser();
 

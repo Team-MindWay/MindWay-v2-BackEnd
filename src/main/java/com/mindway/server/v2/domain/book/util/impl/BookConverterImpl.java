@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class BookConverterImpl implements BookConverter {
-    @Override
+
     public Book toEntity(BookWriteRequest bookWriteRequest, User user) {
         return Book.builder()
                 .title(bookWriteRequest.getTitle())
