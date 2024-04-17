@@ -1,6 +1,7 @@
 package com.mindway.server.v2.domain.book.entity;
 
 import com.mindway.server.v2.domain.user.entity.User;
+import com.mindway.server.v2.global.entity.BaseEntity;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -14,7 +15,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @Getter
 @Builder
-public class Book {
+public class Book extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,8 +24,6 @@ public class Book {
     private String title;
 
     private String plot;
-
-    private LocalDate created_at;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
