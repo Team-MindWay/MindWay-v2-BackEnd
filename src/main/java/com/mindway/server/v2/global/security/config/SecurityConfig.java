@@ -63,6 +63,10 @@ public class SecurityConfig {
                                 .requestMatchers(HttpMethod.POST, "/api/v2/goal").authenticated()
                                 .requestMatchers(HttpMethod.GET, "/api/v2/goal").authenticated()
 
+                                // book
+                                .requestMatchers(HttpMethod.POST, "/api/v2/book").authenticated()
+
+
                                 .anyRequest().authenticated()
                 )
 
