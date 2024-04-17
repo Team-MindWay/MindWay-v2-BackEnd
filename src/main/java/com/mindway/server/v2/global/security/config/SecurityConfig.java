@@ -64,8 +64,12 @@ public class SecurityConfig {
                                 .requestMatchers(HttpMethod.POST, "/api/v2/goal").authenticated()
                                 .requestMatchers(HttpMethod.GET, "/api/v2/goal").authenticated()
 
+                                // book
+                                .requestMatchers(HttpMethod.POST, "/api/v2/book").authenticated()
+
                                 // notice
                                 .requestMatchers(HttpMethod.POST, "/api/v2/notice").hasAnyAuthority(Authority.ROLE_TEACHER.name(), Authority.ROLE_HELPER.name())
+
 
                                 .anyRequest().authenticated()
                 )
