@@ -30,9 +30,12 @@ public enum ErrorCode {
     /* notice */
     NOT_FOUND_NOTICE(404, "등록된 공지가 존재하지 않습니다."),
 
+    /* book */
+    NOT_FOUND_BOOK(404, "등록된 독후감을 찾을 수 없습니다."),
+    NOT_SAME_AUTHOR(403, "작성자가 아닙니다."),
+
     /* image */
     FILE_EXTENSION_INVALID(400, "파일 확장자가 유효하지 않습니다.");
-
 
     private final int status;
     private final String message;
