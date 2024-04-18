@@ -1,5 +1,6 @@
 package com.mindway.server.v2.domain.book.entity;
 
+import com.mindway.server.v2.domain.book.presentation.dto.request.BookUpdateRequest;
 import com.mindway.server.v2.domain.user.entity.User;
 import com.mindway.server.v2.global.entity.BaseEntity;
 import jakarta.persistence.*;
@@ -29,5 +30,10 @@ public class Book extends BaseEntity {
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
+
+    public void updateBook (BookUpdateRequest update) {
+        this.title = update.getTitle();
+        this.plot = update.getPlot();
+    }
 
 }
