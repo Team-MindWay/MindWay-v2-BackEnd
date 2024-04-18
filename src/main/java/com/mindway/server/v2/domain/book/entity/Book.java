@@ -23,7 +23,7 @@ public class Book extends BaseEntity {
 
     private String title;
 
-    @Column(length = 300)
+    @Column(length = 1000)
     private String plot;
 
     @ManyToOne
