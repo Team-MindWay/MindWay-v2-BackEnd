@@ -12,6 +12,6 @@ public class BookWriteRequest {
     private String title;
 
     @NotNull
-    @Size(max = 300)
+    @Size(max = 1000)
     private String plot;
 }
