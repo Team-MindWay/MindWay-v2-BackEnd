@@ -24,7 +24,7 @@ public class S3Util {
 
     public String imageUpload(MultipartFile image) {
         try {
-            List<String> list = List.of("jpg", "jpeg", "png", "gif");
+            List<String> list = List.of("jpg", "jpeg", "png");
 
             String[] splitFile = image.getOriginalFilename().split("\\.");
 
