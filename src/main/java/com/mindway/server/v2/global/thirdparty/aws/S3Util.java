@@ -4,6 +4,7 @@ import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.mindway.server.v2.global.exception.ErrorCode;
 import com.mindway.server.v2.global.exception.MindWayException;
+import com.mindway.server.v2.global.thirdparty.aws.exception.FileExtensionInvalidException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -28,12 +29,12 @@ public class S3Util {
             String[] splitFile = image.getOriginalFilename().split("\\.");
 
             if (splitFile.length < 2)
-                throw new MindWayException(ErrorCode.FILE_EXTENSION_INVALID);
+                throw new FileExtensionInvalidException();
 
             String extension = splitFile[1].toLowerCase();
 
             if (list.stream().noneMatch(it -> it.equals(extension)))
-                throw new MindWayException(ErrorCode.FILE_EXTENSION_INVALID);
+                throw new FileExtensionInvalidException();
 
             return upload(image);
         } catch (IOException e) {
