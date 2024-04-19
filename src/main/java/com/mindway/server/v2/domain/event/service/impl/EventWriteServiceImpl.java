@@ -2,6 +2,8 @@ package com.mindway.server.v2.domain.event.service.impl;
 
 import com.mindway.server.v2.domain.event.converter.EventConverter;
 import com.mindway.server.v2.domain.event.entity.Event;
+import com.mindway.server.v2.domain.event.entity.Status;
+import com.mindway.server.v2.domain.event.exception.InvalidStartAndEndDateException;
 import com.mindway.server.v2.domain.event.presentation.dto.request.EventWriteRequestDto;
 import com.mindway.server.v2.domain.event.repository.EventRepository;
 import com.mindway.server.v2.domain.event.service.EventWriteService;
@@ -13,6 +15,11 @@ import com.mindway.server.v2.global.annotation.ServiceWithTransaction;
 import com.mindway.server.v2.global.thirdparty.aws.S3Util;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.multipart.MultipartFile;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.util.Date;
 
 @ServiceWithTransaction
 @RequiredArgsConstructor
@@ -29,10 +36,35 @@ public class EventWriteServiceImpl implements EventWriteService {
         if (user.getAuthority() == Authority.ROLE_STUDENT)
             throw new NotAccessStudentException();
 
+        Status status = checkDate(eventWriteRequestDto.getCreated_at(), eventWriteRequestDto.getEnded_at());
+
         String image_url = s3Util.imageUpload(image);
 
-        Event event = eventConverter.toEntity(eventWriteRequestDto, user, image_url);
+        Event event = eventConverter.toEntity(eventWriteRequestDto, user, image_url, status);
 
         eventRepository.save(event);
+    }
+
+    private Status checkDate(String started_date, String ended_date) {
+        try {
+            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+
+            Date now = formatter.parse(String.valueOf(LocalDate.now()));
+            Date start = formatter.parse(started_date);
+            Date end = formatter.parse(ended_date);
+
+            if (end.before(start)) {
+                throw new InvalidStartAndEndDateException();
+            }
+
+            if (start.equals(now)) {
+                return Status.NOW;
+            } else if (start.after(now)) {
+                return Status.PENDING;
+            }
+
+        } catch (ParseException e) {}
+
+        return null;
     }
 }
