@@ -30,6 +30,9 @@ public class Event {
 
     private LocalDate ended_at;
 
+    @Enumerated(EnumType.STRING)
+    private Status status;
+
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
