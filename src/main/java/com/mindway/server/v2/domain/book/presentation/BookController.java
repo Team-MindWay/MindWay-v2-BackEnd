@@ -2,9 +2,11 @@ package com.mindway.server.v2.domain.book.presentation;
 
 import com.mindway.server.v2.domain.book.presentation.dto.request.BookUpdateRequest;
 import com.mindway.server.v2.domain.book.presentation.dto.request.BookWriteRequest;
+import com.mindway.server.v2.domain.book.presentation.dto.response.BookInfoResponse;
 import com.mindway.server.v2.domain.book.service.BookDeleteService;
 import com.mindway.server.v2.domain.book.service.BookUpdateService;
 import com.mindway.server.v2.domain.book.service.BookWriteService;
+import com.mindway.server.v2.domain.book.service.GetBookService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -19,6 +21,7 @@ public class BookController {
     private final BookWriteService bookWriteService;
     private final BookDeleteService bookDeleteService;
     private final BookUpdateService bookUpdateService;
+    private final GetBookService getBookService;
 
     @PostMapping
     public ResponseEntity<Void> writeBookReport (@RequestBody @Valid BookWriteRequest bookWriteRequest) {
@@ -37,5 +40,11 @@ public class BookController {
             @PathVariable(value = "book_id") Long id, @RequestBody @Valid BookUpdateRequest bookUpdateRequest) {
         bookUpdateService.execute(bookUpdateRequest, id);
         return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("/{book_id}")
+    public ResponseEntity<BookInfoResponse> getDetailBookReport (@PathVariable(value = "book_id") Long id) {
+        BookInfoResponse bookInfoResponse = getBookService.execute(id);
+        return ResponseEntity.ok(bookInfoResponse);
     }
 }
