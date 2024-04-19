@@ -57,8 +57,8 @@ public class SecurityConfig {
                                 // orders
                                 .requestMatchers(HttpMethod.POST, "/api/v2/order").authenticated()
                                 .requestMatchers(HttpMethod.DELETE, "/api/v2/order/{order_id}").authenticated()
-                                .requestMatchers(HttpMethod.PATCH, "api/v2/order/{order_id}").authenticated()
-                                .requestMatchers(HttpMethod.GET, "api/v2/order").authenticated()
+                                .requestMatchers(HttpMethod.PATCH, "/api/v2/order/{order_id}").authenticated()
+                                .requestMatchers(HttpMethod.GET, "/api/v2/order").authenticated()
 
                                 // goal
                                 .requestMatchers(HttpMethod.POST, "/api/v2/goal").authenticated()
@@ -66,12 +66,13 @@ public class SecurityConfig {
 
                                 // book
                                 .requestMatchers(HttpMethod.POST, "/api/v2/book").authenticated()
-                                .requestMatchers(HttpMethod.DELETE, "api/v2/book/{book_id}").authenticated()
+                                .requestMatchers(HttpMethod.DELETE, "/api/v2/book/{book_id}").authenticated()
+                                .requestMatchers(HttpMethod.PATCH, "/api/v2/book/{book_id}").authenticated()
+                                .requestMatchers(HttpMethod.GET, "/api/v2/book/{book_id}").authenticated()
 
                                 // notice
                                 .requestMatchers(HttpMethod.POST, "/api/v2/notice").hasAnyAuthority(Authority.ROLE_TEACHER.name(), Authority.ROLE_HELPER.name())
                                 .requestMatchers(HttpMethod.GET, "/api/v2/notice").authenticated()
-                                .requestMatchers(HttpMethod.PATCH, "api/v2/book/{book_id}").authenticated()
 
                                 // event
                                 .requestMatchers(HttpMethod.POST, "/api/v2/event").hasAnyAuthority(Authority.ROLE_TEACHER.name(), Authority.ROLE_HELPER.name())
