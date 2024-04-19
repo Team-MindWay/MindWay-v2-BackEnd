@@ -35,7 +35,11 @@ public enum ErrorCode {
     NOT_SAME_AUTHOR(403, "작성자가 아닙니다."),
 
     /* image */
-    FILE_EXTENSION_INVALID(400, "파일 확장자가 유효하지 않습니다.");
+    FILE_EXTENSION_INVALID(400, "파일 확장자가 유효하지 않습니다."),
+
+    /* event */
+    INVALID_START_AND_END_DATE(400, "이벤트 시작과 끝이 올바르지 않습니다.");
+
 
     private final int status;
     private final String message;
