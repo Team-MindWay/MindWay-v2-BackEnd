@@ -34,4 +34,7 @@ public class Event {
     @JoinColumn(name = "user_id")
     private User user;
 
+    public void changeStatus(Status status) {
+        this.status = status;
+    }
 }
