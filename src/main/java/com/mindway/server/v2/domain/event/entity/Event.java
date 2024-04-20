@@ -2,10 +2,7 @@ package com.mindway.server.v2.domain.event.entity;
 
 import com.mindway.server.v2.domain.user.entity.User;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.time.LocalDate;
 
@@ -14,6 +11,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @Getter
 @Builder
+@Setter
 public class Event {
 
     @Id
