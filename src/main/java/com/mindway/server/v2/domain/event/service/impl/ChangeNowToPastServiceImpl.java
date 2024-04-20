@@ -42,7 +42,7 @@ public class ChangeNowToPastServiceImpl implements ChangeNowToPastService {
     }
 
     private void saveChangePast(Event event) {
-        event.setStatus(Status.PAST);
+        event.changeStatus(Status.PAST);
 
         eventRepository.save(event);
     }
