@@ -2,10 +2,7 @@ package com.mindway.server.v2.domain.event.entity;
 
 import com.mindway.server.v2.domain.user.entity.User;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.time.LocalDate;
 
@@ -37,4 +34,7 @@ public class Event {
     @JoinColumn(name = "user_id")
     private User user;
 
+    public void changeStatus(Status status) {
+        this.status = status;
+    }
 }
