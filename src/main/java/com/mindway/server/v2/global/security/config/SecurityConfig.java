@@ -69,6 +69,7 @@ public class SecurityConfig {
                                 .requestMatchers(HttpMethod.DELETE, "/api/v2/book/{book_id}").authenticated()
                                 .requestMatchers(HttpMethod.PATCH, "/api/v2/book/{book_id}").authenticated()
                                 .requestMatchers(HttpMethod.GET, "/api/v2/book/{book_id}").authenticated()
+                                .requestMatchers(HttpMethod.GET, "/api/v2/book").authenticated()
 
                                 // notice
                                 .requestMatchers(HttpMethod.POST, "/api/v2/notice").hasAnyAuthority(Authority.ROLE_TEACHER.name(), Authority.ROLE_HELPER.name())
