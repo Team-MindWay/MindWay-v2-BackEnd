@@ -28,7 +28,6 @@ public class BookConverterImpl implements BookConverter {
                 .build();
     }
 
-    @Override
     public BookListResponse toListDto(Book book) {
         return BookListResponse.builder()
                 .id(book.getId())
