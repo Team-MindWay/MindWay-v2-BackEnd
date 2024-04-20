@@ -42,17 +42,8 @@ public class ChangeNowToPastServiceImpl implements ChangeNowToPastService {
     }
 
     private void saveChangePast(Event event) {
-        Event changeEvent = Event.builder()
-                .id(event.getId())
-                .title(event.getTitle())
-                .content(event.getContent())
-                .user(event.getUser())
-                .started_at(event.getStarted_at())
-                .ended_at(event.getEnded_at())
-                .img_url(event.getImg_url())
-                .status(Status.PAST)
-                .build();
+        event.setStatus(Status.PAST);
 
-        eventRepository.save(changeEvent);
+        eventRepository.save(event);
     }
 }
