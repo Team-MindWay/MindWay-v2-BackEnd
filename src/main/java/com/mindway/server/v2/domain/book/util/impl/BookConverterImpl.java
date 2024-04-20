@@ -8,6 +8,7 @@ import com.mindway.server.v2.domain.book.util.BookConverter;
 import com.mindway.server.v2.domain.user.entity.User;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 @Component
@@ -33,7 +34,7 @@ public class BookConverterImpl implements BookConverter {
                 .id(book.getId())
                 .title(book.getTitle())
                 .plot(book.getPlot())
-                .date(book.getCreateAt().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")))
+                .date(LocalDate.from(book.getCreateAt()))
                 .build();
     }
 }
