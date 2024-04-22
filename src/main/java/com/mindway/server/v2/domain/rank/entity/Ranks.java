@@ -3,12 +3,14 @@ package com.mindway.server.v2.domain.rank.entity;
 import com.mindway.server.v2.domain.user.entity.User;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 @Getter
 public class Ranks {
 
@@ -16,7 +18,7 @@ public class Ranks {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Integer accrue = 0;
+    private Integer accrue;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
@@ -26,7 +28,4 @@ public class Ranks {
         accrue++;
     }
 
-    public Ranks(User user) {
-        this.user = user;
-    }
 }

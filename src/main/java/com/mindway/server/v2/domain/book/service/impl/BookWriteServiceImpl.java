@@ -30,11 +30,17 @@ public class BookWriteServiceImpl implements BookWriteService {
     }
 
     private void accrue(User user) {
-        Ranks rank = rankRepository.findByUser(user);
-        if (rank == null) {
-            rank = new Ranks(user);
-        }
+        Ranks rank = rankRepository.findByUser(user)
+                .orElseGet(() -> saveUserRank(user));
+
         rank.accrue();
         rankRepository.save(rank);
+    }
+
+    private Ranks saveUserRank (User user) {
+        return Ranks.builder()
+                .user(user)
+                .accrue(0)
+                .build();
     }
 }
