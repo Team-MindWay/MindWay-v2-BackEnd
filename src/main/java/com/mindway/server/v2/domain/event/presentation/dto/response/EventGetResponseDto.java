@@ -6,7 +6,7 @@ import lombok.Getter;
 
 @Getter
 @Builder
-public class EventGetsResponseDto {
+public class EventGetResponseDto {
     private Long id;
     private String title;
     private String img_url;
