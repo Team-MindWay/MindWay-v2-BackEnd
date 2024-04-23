@@ -28,6 +28,8 @@ public class WriteRecServiceImpl implements WriteRecService {
             throw new NotAccessStudentException();
         }
 
-        recRepository.save(recConverter.toEntity(writeRecRequest, type));
+        Rec rec = recConverter.toEntity(writeRecRequest, type);
+
+        recRepository.save(rec);
     }
 }
