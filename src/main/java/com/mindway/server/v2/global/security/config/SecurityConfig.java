@@ -81,6 +81,9 @@ public class SecurityConfig {
                                 // rank
                                 .requestMatchers(HttpMethod.GET, "/api/v2/rank").authenticated()
 
+                                // recommend
+                                .requestMatchers(HttpMethod.POST, "/api/v2/recommend").hasAnyAuthority(Authority.ROLE_TEACHER.name(), Authority.ROLE_STUDENT.name())
+
                                 .anyRequest().authenticated()
                 )
 
