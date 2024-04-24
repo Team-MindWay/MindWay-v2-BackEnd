@@ -29,6 +29,7 @@ public class EventConverterImpl implements EventConverter {
         return EventGetResponseDto.builder()
                 .id(event.getId())
                 .title(event.getTitle())
+                .content(event.getContent())
                 .img_url(event.getImg_url())
                 .started_at(String.valueOf(event.getStarted_at()))
                 .ended_at(String.valueOf(event.getEnded_at()))
