@@ -80,6 +80,7 @@ public class SecurityConfig {
                                 .requestMatchers(HttpMethod.GET, "/api/v2/event").authenticated()
                                 .requestMatchers(HttpMethod.GET, "/api/v2/event/{event_id}").authenticated()
                                 .requestMatchers(HttpMethod.DELETE, "/api/v2/event/{event_id}").hasAnyAuthority(Authority.ROLE_TEACHER.name(), Authority.ROLE_HELPER.name())
+                                .requestMatchers(HttpMethod.GET, "/api/v2/event/date").authenticated()
 
                                 // rank
                                 .requestMatchers(HttpMethod.GET, "/api/v2/rank").authenticated()
