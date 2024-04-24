@@ -4,6 +4,7 @@ import com.mindway.server.v2.domain.event.entity.Status;
 import com.mindway.server.v2.domain.event.presentation.dto.request.EventWriteRequestDto;
 import com.mindway.server.v2.domain.event.presentation.dto.response.EventGetResponseDto;
 import com.mindway.server.v2.domain.event.presentation.dto.response.EventInfoResponseDto;
+import com.mindway.server.v2.domain.event.service.EventDeleteService;
 import com.mindway.server.v2.domain.event.service.EventGetService;
 import com.mindway.server.v2.domain.event.service.EventInfoService;
 import com.mindway.server.v2.domain.event.service.EventWriteService;
@@ -24,6 +25,7 @@ public class EventController {
     private final EventWriteService eventWriteService;
     private final EventGetService eventGetService;
     private final EventInfoService eventInfoService;
+    private final EventDeleteService eventDeleteService;
 
     @PostMapping
     public ResponseEntity<Void> writeEvent(
@@ -44,6 +46,12 @@ public class EventController {
     public ResponseEntity<EventInfoResponseDto> getInfoEvent(@PathVariable("event_id") Long id) {
         EventInfoResponseDto response = eventInfoService.execute(id);
         return ResponseEntity.ok(response);
+    }
+
+    @DeleteMapping("/{event_id}")
+    public ResponseEntity<Void> deleteEvent(@PathVariable("event_id") Long id) {
+        eventDeleteService.execute(id);
+        return ResponseEntity.noContent().build();
     }
 
 }
