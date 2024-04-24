@@ -5,6 +5,7 @@ import com.mindway.server.v2.domain.event.entity.Event;
 import com.mindway.server.v2.domain.event.entity.Status;
 import com.mindway.server.v2.domain.event.presentation.dto.request.EventWriteRequestDto;
 import com.mindway.server.v2.domain.event.presentation.dto.response.EventGetResponseDto;
+import com.mindway.server.v2.domain.event.presentation.dto.response.EventInfoResponseDto;
 import com.mindway.server.v2.domain.user.entity.User;
 import org.springframework.stereotype.Component;
 
@@ -28,6 +29,16 @@ public class EventConverterImpl implements EventConverter {
         return EventGetResponseDto.builder()
                 .id(event.getId())
                 .title(event.getTitle())
+                .img_url(event.getImg_url())
+                .started_at(String.valueOf(event.getStarted_at()))
+                .ended_at(String.valueOf(event.getEnded_at()))
+                .build();
+    }
+
+    public EventInfoResponseDto toInfoDto(Event event) {
+        return EventInfoResponseDto.builder()
+                .title(event.getTitle())
+                .content(event.getContent())
                 .img_url(event.getImg_url())
                 .started_at(String.valueOf(event.getStarted_at()))
                 .ended_at(String.valueOf(event.getEnded_at()))
