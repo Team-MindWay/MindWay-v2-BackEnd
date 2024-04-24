@@ -39,6 +39,7 @@ public enum ErrorCode {
 
     /* event */
     INVALID_START_AND_END_DATE(400, "이벤트 시작과 끝이 올바르지 않습니다."),
+    NOT_FOUND_EVENT(404, "해당하는 이벤트를 찾지 못 했습니다."),
 
     /* recommend */
     NOT_FOUND_RECOMMEND_BOOK(404, "추천 도서를 찾을 수 없습니다.");
