@@ -38,7 +38,8 @@ public enum ErrorCode {
     FILE_EXTENSION_INVALID(400, "파일 확장자가 유효하지 않습니다."),
 
     /* event */
-    INVALID_START_AND_END_DATE(400, "이벤트 시작과 끝이 올바르지 않습니다.");
+    INVALID_START_AND_END_DATE(400, "이벤트 시작과 끝이 올바르지 않습니다."),
+    NOT_FOUND_EVENT(404, "해당하는 이벤트를 찾지 못했습니다.");
 
 
     private final int status;
