@@ -3,7 +3,9 @@ package com.mindway.server.v2.domain.event.presentation;
 import com.mindway.server.v2.domain.event.entity.Status;
 import com.mindway.server.v2.domain.event.presentation.dto.request.EventWriteRequestDto;
 import com.mindway.server.v2.domain.event.presentation.dto.response.EventGetResponseDto;
+import com.mindway.server.v2.domain.event.presentation.dto.response.EventInfoResponseDto;
 import com.mindway.server.v2.domain.event.service.EventGetService;
+import com.mindway.server.v2.domain.event.service.EventInfoService;
 import com.mindway.server.v2.domain.event.service.EventWriteService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -21,6 +23,7 @@ public class EventController {
 
     private final EventWriteService eventWriteService;
     private final EventGetService eventGetService;
+    private final EventInfoService eventInfoService;
 
     @PostMapping
     public ResponseEntity<Void> writeEvent(
@@ -37,6 +40,10 @@ public class EventController {
         return ResponseEntity.ok(responses);
     }
 
-
+    @GetMapping("/{event_id}")
+    public ResponseEntity<EventInfoResponseDto> getInfoEvent(@PathVariable("event_id") Long id) {
+        EventInfoResponseDto response = eventInfoService.execute(id);
+        return ResponseEntity.ok(response);
+    }
 
 }
