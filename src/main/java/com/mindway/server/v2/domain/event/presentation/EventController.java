@@ -4,10 +4,7 @@ import com.mindway.server.v2.domain.event.entity.Status;
 import com.mindway.server.v2.domain.event.presentation.dto.request.EventWriteRequestDto;
 import com.mindway.server.v2.domain.event.presentation.dto.response.EventGetResponseDto;
 import com.mindway.server.v2.domain.event.presentation.dto.response.EventInfoResponseDto;
-import com.mindway.server.v2.domain.event.service.EventDeleteService;
-import com.mindway.server.v2.domain.event.service.EventGetService;
-import com.mindway.server.v2.domain.event.service.EventInfoService;
-import com.mindway.server.v2.domain.event.service.EventWriteService;
+import com.mindway.server.v2.domain.event.service.*;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -15,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.text.ParseException;
 import java.util.List;
 
 @RestController
@@ -26,6 +24,7 @@ public class EventController {
     private final EventGetService eventGetService;
     private final EventInfoService eventInfoService;
     private final EventDeleteService eventDeleteService;
+    private final EventGetByDateService eventGetByDateService;
 
     @PostMapping
     public ResponseEntity<Void> writeEvent(
@@ -52,6 +51,12 @@ public class EventController {
     public ResponseEntity<Void> deleteEvent(@PathVariable("event_id") Long id) {
         eventDeleteService.execute(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("/date")
+    public ResponseEntity<List<EventGetResponseDto>> getEventByDate(@RequestParam String date) throws ParseException {
+        List<EventGetResponseDto> responses = eventGetByDateService.execute(date);
+        return ResponseEntity.ok(responses);
     }
 
 }
