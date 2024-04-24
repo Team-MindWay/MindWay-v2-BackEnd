@@ -38,8 +38,10 @@ public enum ErrorCode {
     FILE_EXTENSION_INVALID(400, "파일 확장자가 유효하지 않습니다."),
 
     /* event */
-    INVALID_START_AND_END_DATE(400, "이벤트 시작과 끝이 올바르지 않습니다.");
+    INVALID_START_AND_END_DATE(400, "이벤트 시작과 끝이 올바르지 않습니다."),
 
+    /* recommend */
+    NOT_FOUND_RECOMMEND_BOOK(404, "추천 도서를 찾을 수 없습니다.");
 
     private final int status;
     private final String message;
