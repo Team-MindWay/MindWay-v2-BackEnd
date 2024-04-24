@@ -1,5 +1,6 @@
 package com.mindway.server.v2.domain.rec.entity;
 
+import com.mindway.server.v2.domain.rec.presentation.dto.reqest.UpdateRecRequest;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -27,4 +28,9 @@ public class Rec {
     @Enumerated(EnumType.STRING)
     private Type type;
 
+    public void updateRec (UpdateRecRequest updateRecRequest) {
+        this.title = updateRecRequest.getTitle();;
+        this.content = updateRecRequest.getContent();
+        this.author = updateRecRequest.getAuthor();
+    }
 }
