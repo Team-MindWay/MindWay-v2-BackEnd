@@ -35,8 +35,8 @@ public class RecController {
         return ResponseEntity.ok(responses);
     }
 
-    @PatchMapping("/{id}")
-    public ResponseEntity<Void> updateRecBook (@PathVariable Long id, @RequestBody @Valid UpdateRecRequest updateRecRequest) {
+    @PatchMapping("/{rec_id}")
+    public ResponseEntity<Void> updateRecBook (@PathVariable(value = "rec_id") Long id, @RequestBody @Valid UpdateRecRequest updateRecRequest) {
         updateRecService.execute(id, updateRecRequest);
         return ResponseEntity.noContent().build();
     }
