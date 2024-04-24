@@ -83,6 +83,7 @@ public class SecurityConfig {
 
                                 // recommend
                                 .requestMatchers(HttpMethod.POST, "/api/v2/recommend").hasAnyAuthority(Authority.ROLE_TEACHER.name(), Authority.ROLE_HELPER.name())
+                                .requestMatchers(HttpMethod.PATCH, "/api/v2/recommend").hasAnyAuthority(Authority.ROLE_TEACHER.name(), Authority.ROLE_HELPER.name())
                                 .requestMatchers(HttpMethod.GET, "/api/v2/recommend").authenticated()
 
                                 .anyRequest().authenticated()
