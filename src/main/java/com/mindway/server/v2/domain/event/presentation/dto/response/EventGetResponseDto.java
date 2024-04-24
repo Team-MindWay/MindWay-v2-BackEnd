@@ -9,6 +9,7 @@ import lombok.Getter;
 public class EventGetResponseDto {
     private Long id;
     private String title;
+    private String content;
     private String img_url;
     private String started_at;
     private String ended_at;
