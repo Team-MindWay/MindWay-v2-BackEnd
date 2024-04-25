@@ -90,7 +90,7 @@ public class SecurityConfig {
                                 .requestMatchers(HttpMethod.PATCH, "/api/v2/recommend/{rec_id}").hasAnyAuthority(Authority.ROLE_TEACHER.name(), Authority.ROLE_HELPER.name())
                                 .requestMatchers(HttpMethod.GET, "/api/v2/recommend").authenticated()
 
-                                .anyRequest().authenticated()
+                                .anyRequest().denyAll()
                 )
 
                 .addFilterBefore(new JwtFilter(jwtProvider), UsernamePasswordAuthenticationFilter.class);
