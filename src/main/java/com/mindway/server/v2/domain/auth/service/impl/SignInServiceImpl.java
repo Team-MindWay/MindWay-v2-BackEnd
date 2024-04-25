@@ -50,7 +50,7 @@ public class SignInServiceImpl implements SignInService {
                     clientSecret,
                     redirectUri
             );
-            log.info("After generateToken");
+            log.info("After generateToken {} {} {} {}", clientId, clientSecret, redirectUri, gAuthToken.getAccessToken());
             log.info("Before getUserInfo");
             GAuthUserInfo userInfo = gAuth.getUserInfo(gAuthToken.getAccessToken());
             log.info("After getUserInfo");
