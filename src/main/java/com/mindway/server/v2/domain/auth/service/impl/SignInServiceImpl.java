@@ -41,16 +41,19 @@ public class SignInServiceImpl implements SignInService {
     @Value("${gauth.redirectUri}")
     private String redirectUri;
 
-    public TokenResponse execute(SignInRequest signInRequest) throws GAuthException{
+    public TokenResponse execute(SignInRequest signInRequest) {
         try {
+            log.info("Before generateToken");
             GAuthToken gAuthToken = gAuth.generateToken(
                     signInRequest.getCode(),
                     clientId,
                     clientSecret,
                     redirectUri
             );
+            log.info("After generateToken");
+            log.info("Before getUserInfo");
             GAuthUserInfo userInfo = gAuth.getUserInfo(gAuthToken.getAccessToken());
-
+            log.info("After getUserInfo");
             User user = userRepository.findByEmail(userInfo.getEmail())
                     .orElseGet(() -> saveUser(userInfo));
 
