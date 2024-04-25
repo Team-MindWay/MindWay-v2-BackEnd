@@ -34,7 +34,7 @@ public class BookConverterImpl implements BookConverter {
                 .id(book.getId())
                 .title(book.getTitle())
                 .plot(book.getPlot())
-                .date(LocalDate.from(book.getCreateAt()))
+                .date(book.getCreateAt().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")))
                 .build();
     }
 }
