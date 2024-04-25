@@ -12,7 +12,7 @@ public class BookListResponse {
     private Long id;
     private String title;
     private String plot;
-    private LocalDate date;
+    private String date;
 }
 
 
