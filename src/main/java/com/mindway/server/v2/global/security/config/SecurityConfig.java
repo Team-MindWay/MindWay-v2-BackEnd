@@ -47,7 +47,7 @@ public class SecurityConfig {
                                 .requestMatchers(CorsUtils::isPreFlightRequest).permitAll()
 
                                 // auth
-                                .requestMatchers(HttpMethod.POST, "/api/v2/auth/signin").permitAll()
+                                .requestMatchers(HttpMethod.POST, "/api/v2/auth").permitAll()
                                 .requestMatchers(HttpMethod.PATCH, "/api/v2/auth").permitAll()
                                 .requestMatchers(HttpMethod.DELETE, "/api/v2/auth").permitAll()
 
