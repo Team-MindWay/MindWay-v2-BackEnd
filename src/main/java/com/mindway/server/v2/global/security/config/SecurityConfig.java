@@ -47,7 +47,7 @@ public class SecurityConfig {
                                 .requestMatchers(CorsUtils::isPreFlightRequest).permitAll()
 
                                 // auth
-                                .requestMatchers(HttpMethod.POST, "/api/v2/auth/signin").permitAll()
+                                .requestMatchers(HttpMethod.POST, "/api/v2/auth").permitAll()
                                 .requestMatchers(HttpMethod.PATCH, "/api/v2/auth").permitAll()
                                 .requestMatchers(HttpMethod.DELETE, "/api/v2/auth").permitAll()
 
@@ -90,7 +90,7 @@ public class SecurityConfig {
                                 .requestMatchers(HttpMethod.PATCH, "/api/v2/recommend/{rec_id}").hasAnyAuthority(Authority.ROLE_TEACHER.name(), Authority.ROLE_HELPER.name())
                                 .requestMatchers(HttpMethod.GET, "/api/v2/recommend").authenticated()
 
-                                .anyRequest().authenticated()
+                                .anyRequest().denyAll()
                 )
 
                 .addFilterBefore(new JwtFilter(jwtProvider), UsernamePasswordAuthenticationFilter.class);

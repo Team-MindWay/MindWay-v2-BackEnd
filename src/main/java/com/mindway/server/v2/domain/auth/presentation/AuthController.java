@@ -19,7 +19,7 @@ public class AuthController {
     private final ReissueTokenService reissueTokenService;
     private final LogoutService logoutService;
 
-    @PostMapping("/signin")
+    @PostMapping
     public ResponseEntity<TokenResponse> signIn(@RequestBody @Valid SignInRequest signInRequest) {
         TokenResponse response = signInService.execute(signInRequest);
         return ResponseEntity.ok(response);
