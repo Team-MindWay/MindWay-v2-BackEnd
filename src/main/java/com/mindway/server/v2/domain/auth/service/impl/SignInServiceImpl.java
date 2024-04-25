@@ -26,7 +26,6 @@ import java.util.UUID;
 
 @RequiredArgsConstructor
 @ServiceWithTransaction
-@Slf4j
 public class SignInServiceImpl implements SignInService {
 
     private final GAuth gAuth;
@@ -43,17 +42,15 @@ public class SignInServiceImpl implements SignInService {
 
     public TokenResponse execute(SignInRequest signInRequest) {
         try {
-            log.info("Before generateToken");
             GAuthToken gAuthToken = gAuth.generateToken(
                     signInRequest.getCode(),
                     clientId,
                     clientSecret,
                     redirectUri
             );
-            log.info("After generateToken {} {} {} {}", clientId, clientSecret, redirectUri, gAuthToken.getAccessToken());
-            log.info("Before getUserInfo");
+
             GAuthUserInfo userInfo = gAuth.getUserInfo(gAuthToken.getAccessToken());
-            log.info("After getUserInfo");
+
             User user = userRepository.findByEmail(userInfo.getEmail())
                     .orElseGet(() -> saveUser(userInfo));
 
