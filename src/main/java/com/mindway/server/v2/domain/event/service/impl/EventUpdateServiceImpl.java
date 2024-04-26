@@ -35,9 +35,8 @@ public class EventUpdateServiceImpl implements EventUpdateService {
     public void execute(Long eventId, EventUpdateRequestDto eventUpdateRequestDto, MultipartFile image) {
         User user = userUtil.getCurrentUser();
 
-        Event findEvent = eventRepository.findById(eventId)
-                .orElseThrow(NotFoundEventException::new);
-
+        if (!eventRepository.existsEventById(eventId))
+            throw new NotFoundEventException();
 
         if (user.getAuthority() == Authority.ROLE_STUDENT)
             throw new NotAccessStudentException();
