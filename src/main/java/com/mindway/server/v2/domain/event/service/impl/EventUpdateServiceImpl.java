@@ -38,8 +38,6 @@ public class EventUpdateServiceImpl implements EventUpdateService {
         Event findEvent = eventRepository.findById(eventId)
                 .orElseThrow(NotFoundEventException::new);
 
-        if (findEvent.getUser() != user)
-            throw new InvalidUserEventException();
 
         if (user.getAuthority() == Authority.ROLE_STUDENT)
             throw new NotAccessStudentException();
