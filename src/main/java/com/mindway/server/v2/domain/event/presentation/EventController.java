@@ -1,6 +1,7 @@
 package com.mindway.server.v2.domain.event.presentation;
 
 import com.mindway.server.v2.domain.event.entity.Status;
+import com.mindway.server.v2.domain.event.presentation.dto.request.EventUpdateRequestDto;
 import com.mindway.server.v2.domain.event.presentation.dto.request.EventWriteRequestDto;
 import com.mindway.server.v2.domain.event.presentation.dto.response.EventGetResponseDto;
 import com.mindway.server.v2.domain.event.presentation.dto.response.EventInfoResponseDto;
@@ -25,11 +26,12 @@ public class EventController {
     private final EventInfoService eventInfoService;
     private final EventDeleteService eventDeleteService;
     private final EventGetByDateService eventGetByDateService;
+    private final EventUpdateService eventUpdateService;
 
     @PostMapping
     public ResponseEntity<Void> writeEvent(
-            @Valid @RequestPart("dto") EventWriteRequestDto eventWriteRequestDto,
-            @RequestPart(required = false) MultipartFile image
+        @Valid @RequestPart("dto") EventWriteRequestDto eventWriteRequestDto,
+        @RequestPart(required = false) MultipartFile image
     ) {
         eventWriteService.execute(eventWriteRequestDto, image);
         return ResponseEntity.status(HttpStatus.CREATED).build();
@@ -57,6 +59,16 @@ public class EventController {
     public ResponseEntity<List<EventGetResponseDto>> getEventByDate(@RequestParam String date) throws ParseException {
         List<EventGetResponseDto> responses = eventGetByDateService.execute(date);
         return ResponseEntity.ok(responses);
+    }
+
+    @PatchMapping("/{event_id}")
+    public ResponseEntity<Void> updateEvent(
+        @PathVariable("event_id") Long eventId,
+        @Valid @RequestPart("dto") EventUpdateRequestDto eventUpdateRequestDto,
+        @RequestPart(required = false) MultipartFile image
+    ) {
+        eventUpdateService.execute(eventId, eventUpdateRequestDto, image);
+        return ResponseEntity.status(HttpStatus.RESET_CONTENT).build();
     }
 
 }

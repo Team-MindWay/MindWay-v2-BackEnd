@@ -3,6 +3,7 @@ package com.mindway.server.v2.domain.event.converter.impl;
 import com.mindway.server.v2.domain.event.converter.EventConverter;
 import com.mindway.server.v2.domain.event.entity.Event;
 import com.mindway.server.v2.domain.event.entity.Status;
+import com.mindway.server.v2.domain.event.presentation.dto.request.EventUpdateRequestDto;
 import com.mindway.server.v2.domain.event.presentation.dto.request.EventWriteRequestDto;
 import com.mindway.server.v2.domain.event.presentation.dto.response.EventGetResponseDto;
 import com.mindway.server.v2.domain.event.presentation.dto.response.EventInfoResponseDto;
@@ -43,6 +44,19 @@ public class EventConverterImpl implements EventConverter {
                 .img_url(event.getImg_url())
                 .started_at(String.valueOf(event.getStarted_at()))
                 .ended_at(String.valueOf(event.getEnded_at()))
+                .build();
+    }
+
+    public Event toUpdateEntity(Long eventId, EventUpdateRequestDto eventUpdateRequestDto, User user, String img_url, Status status) {
+        return Event.builder()
+                .id(eventId)
+                .title(eventUpdateRequestDto.getTitle())
+                .content(eventUpdateRequestDto.getContent())
+                .started_at(LocalDate.parse(eventUpdateRequestDto.getCreated_at()))
+                .ended_at(LocalDate.parse(eventUpdateRequestDto.getEnded_at()))
+                .img_url(img_url)
+                .status(status)
+                .user(user)
                 .build();
     }
 }
