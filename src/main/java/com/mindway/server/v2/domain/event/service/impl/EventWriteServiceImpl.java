@@ -53,14 +53,12 @@ public class EventWriteServiceImpl implements EventWriteService {
             Date start = formatter.parse(started_date);
             Date end = formatter.parse(ended_date);
 
-            if (end.before(start)) {
-                throw new InvalidStartAndEndDateException();
-            }
-
-            if (start.equals(now)) {
+            if (start.equals(now) && (start.equals(end) || start.before(end))) {
                 return Status.NOW;
-            } else if (start.after(now)) {
+            } else if (start.after(now) && (start.equals(end) || start.before(end))) {
                 return Status.PENDING;
+            } else {
+                throw new InvalidStartAndEndDateException();
             }
 
         } catch (ParseException e) {}
