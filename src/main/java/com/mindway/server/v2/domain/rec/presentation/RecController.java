@@ -4,6 +4,7 @@ import com.mindway.server.v2.domain.rec.entity.Type;
 import com.mindway.server.v2.domain.rec.presentation.dto.reqest.UpdateRecRequest;
 import com.mindway.server.v2.domain.rec.presentation.dto.reqest.WriteRecRequest;
 import com.mindway.server.v2.domain.rec.presentation.dto.response.RecInfoResponse;
+import com.mindway.server.v2.domain.rec.service.DeleteRecService;
 import com.mindway.server.v2.domain.rec.service.GetRecService;
 import com.mindway.server.v2.domain.rec.service.UpdateRecService;
 import com.mindway.server.v2.domain.rec.service.WriteRecService;
@@ -22,6 +23,7 @@ public class RecController {
     private final WriteRecService writeRecService;
     private final GetRecService getRecService;
     private final UpdateRecService updateRecService;
+    private final DeleteRecService deleteRecService;
 
     @PostMapping
     public ResponseEntity<Void> writeRecBook (@RequestBody @Valid WriteRecRequest writeRecRequest, @RequestParam Type type){
@@ -38,6 +40,12 @@ public class RecController {
     @PatchMapping("/{rec_id}")
     public ResponseEntity<Void> updateRecBook (@PathVariable(value = "rec_id") Long id, @RequestBody @Valid UpdateRecRequest updateRecRequest) {
         updateRecService.execute(id, updateRecRequest);
+        return ResponseEntity.noContent().build();
+    }
+
+    @DeleteMapping("/{rec_id}")
+    public ResponseEntity<Void> deleteRecBook (@PathVariable(value = "rec_id") Long id){
+        deleteRecService.execute(id);
         return ResponseEntity.noContent().build();
     }
 
