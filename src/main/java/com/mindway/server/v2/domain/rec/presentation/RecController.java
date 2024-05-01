@@ -38,13 +38,13 @@ public class RecController {
     }
 
     @PatchMapping("/{rec_id}")
-    public ResponseEntity<Void> updateRecBook (@PathVariable(value = "rec_id") Long id, @RequestBody @Valid UpdateRecRequest updateRecRequest) {
+    public ResponseEntity<Void> updateRecBook (@PathVariable("rec_id") Long id, @RequestBody @Valid UpdateRecRequest updateRecRequest) {
         updateRecService.execute(id, updateRecRequest);
         return ResponseEntity.noContent().build();
     }
 
     @DeleteMapping("/{rec_id}")
-    public ResponseEntity<Void> deleteRecBook (@PathVariable(value = "rec_id") Long id){
+    public ResponseEntity<Void> deleteRecBook (@PathVariable("rec_id") Long id){
         deleteRecService.execute(id);
         return ResponseEntity.noContent().build();
     }

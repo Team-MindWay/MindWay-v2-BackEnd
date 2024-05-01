@@ -31,20 +31,20 @@ public class BookController {
     }
 
     @DeleteMapping("/{book_id}")
-    public ResponseEntity<Void> deleteBookReport (@PathVariable(value = "book_id") Long id) {
+    public ResponseEntity<Void> deleteBookReport (@PathVariable("book_id") Long id) {
         bookDeleteService.execute(id);
         return ResponseEntity.noContent().build();
     }
 
     @PatchMapping("/{book_id}")
     public ResponseEntity<Void> updateBookReport (
-            @PathVariable(value = "book_id") Long id, @RequestBody @Valid BookUpdateRequest bookUpdateRequest) {
+            @PathVariable("book_id") Long id, @RequestBody @Valid BookUpdateRequest bookUpdateRequest) {
         bookUpdateService.execute(bookUpdateRequest, id);
         return ResponseEntity.noContent().build();
     }
 
     @GetMapping("/{book_id}")
-    public ResponseEntity<BookInfoResponse> getDetailBookReport (@PathVariable(value = "book_id") Long id) {
+    public ResponseEntity<BookInfoResponse> getDetailBookReport (@PathVariable("book_id") Long id) {
         BookInfoResponse bookInfoResponse = getBookService.execute(id);
         return ResponseEntity.ok(bookInfoResponse);
     }
