@@ -25,7 +25,8 @@ public class BookController {
     private final GetBookListService getBookListService;
 
     @PostMapping
-    public ResponseEntity<Void> writeBookReport (@RequestBody @Valid BookWriteRequest bookWriteRequest) {
+    public ResponseEntity<Void> writeBookReport (
+            @RequestBody @Valid BookWriteRequest bookWriteRequest) {
         bookWriteService.execute(bookWriteRequest);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
