@@ -39,7 +39,9 @@ public class BookController {
 
     @PatchMapping("/{book_id}")
     public ResponseEntity<Void> updateBookReport (
-            @PathVariable("book_id") Long id, @RequestBody @Valid BookUpdateRequest bookUpdateRequest) {
+            @PathVariable("book_id") Long id,
+            @RequestBody @Valid BookUpdateRequest bookUpdateRequest
+    ) {
         bookUpdateService.execute(bookUpdateRequest, id);
         return ResponseEntity.noContent().build();
     }

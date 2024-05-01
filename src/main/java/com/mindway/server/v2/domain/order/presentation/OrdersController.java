@@ -39,7 +39,9 @@ public class OrdersController {
 
     @PatchMapping("/{order_id}")
     public ResponseEntity<Void> updateBook (
-            @PathVariable("order_id") Long id, @RequestBody @Valid OrderUpdateRequest orderUpdate) {
+            @PathVariable("order_id") Long id,
+            @RequestBody @Valid OrderUpdateRequest orderUpdate
+    ) {
         updateBookOrderService.execute(id, orderUpdate);
         return ResponseEntity.noContent().build();
     }
