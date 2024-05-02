@@ -4,6 +4,7 @@ import com.mindway.server.v2.domain.auth.presentation.dto.response.TokenResponse
 import com.mindway.server.v2.global.auth.AuthDetailsService;
 import com.mindway.server.v2.global.exception.ErrorCode;
 import com.mindway.server.v2.global.exception.MindWayException;
+import com.mindway.server.v2.global.redis.RedisUtil;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
@@ -41,6 +42,7 @@ public class JwtProvider {
     private String secretKey;
     private static Key key;
     private final AuthDetailsService authDetailsService;
+    private final RedisUtil redisUtil;
 
     @PostConstruct
     public void init(){
@@ -57,11 +59,21 @@ public class JwtProvider {
                 .build();
     }
 
+    public Long getExpiration(String accessToken) {
+        Claims claims = Jwts.parserBuilder()
+                .setSigningKey(key)
+                .build()
+                .parseClaimsJws(accessToken)
+                .getBody();
+
+        return claims.getExpiration().getTime();
+    }
+
     public boolean validateToken(String token) {
         try {
             Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(token);
 
-            return true;
+            return !redisUtil.hasKeyBlackList(token);
         } catch (ExpiredJwtException e) {
             throw new MindWayException(ErrorCode.EXPIRED_TOKEN);
         } catch (Exception e) {

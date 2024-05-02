@@ -5,6 +5,7 @@ import com.mindway.server.v2.domain.auth.presentation.dto.response.TokenResponse
 import com.mindway.server.v2.domain.auth.service.LogoutService;
 import com.mindway.server.v2.domain.auth.service.ReissueTokenService;
 import com.mindway.server.v2.domain.auth.service.SignInService;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -32,8 +33,8 @@ public class AuthController {
     }
 
     @DeleteMapping
-    public ResponseEntity<Void> logout() {
-        logoutService.execute();
+    public ResponseEntity<Void> logout(HttpServletRequest request) {
+        logoutService.execute(request.getHeader("Authorization").substring(7));
         return ResponseEntity.noContent().build();
     }
 

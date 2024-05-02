@@ -40,7 +40,7 @@ dependencies {
 	implementation("io.jsonwebtoken:jjwt-jackson:0.11.5")
 
 	//redis
-	implementation ("org.springframework.boot:spring-boot-starter-data-redis:2.3.1.RELEASE")
+	implementation ("org.springframework.boot:spring-boot-starter-data-redis")
 
 	// aws
 	implementation("org.springframework.cloud:spring-cloud-starter-aws:2.2.6.RELEASE")
