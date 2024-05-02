@@ -25,8 +25,7 @@ public class BookController {
     private final GetBookListService getBookListService;
 
     @PostMapping
-    public ResponseEntity<Void> writeBookReport (
-            @RequestBody @Valid BookWriteRequest bookWriteRequest) {
+    public ResponseEntity<Void> writeBookReport (@RequestBody @Valid BookWriteRequest bookWriteRequest) {
         bookWriteService.execute(bookWriteRequest);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
@@ -39,8 +38,8 @@ public class BookController {
 
     @PatchMapping("/{book_id}")
     public ResponseEntity<Void> updateBookReport (
-            @PathVariable("book_id") Long id,
-            @RequestBody @Valid BookUpdateRequest bookUpdateRequest
+        @PathVariable("book_id") Long id,
+        @RequestBody @Valid BookUpdateRequest bookUpdateRequest
     ) {
         bookUpdateService.execute(bookUpdateRequest, id);
         return ResponseEntity.noContent().build();

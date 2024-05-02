@@ -27,8 +27,8 @@ public class RecController {
 
     @PostMapping
     public ResponseEntity<Void> writeRecBook (
-            @RequestBody @Valid WriteRecRequest writeRecRequest,
-            @RequestParam Type type
+        @RequestBody @Valid WriteRecRequest writeRecRequest,
+        @RequestParam Type type
     ) {
         writeRecService.execute(writeRecRequest, type);
         return ResponseEntity.status(HttpStatus.CREATED).build();
@@ -42,8 +42,8 @@ public class RecController {
 
     @PatchMapping("/{rec_id}")
     public ResponseEntity<Void> updateRecBook (
-            @PathVariable("rec_id") Long id,
-            @RequestBody @Valid UpdateRecRequest updateRecRequest
+        @PathVariable("rec_id") Long id,
+        @RequestBody @Valid UpdateRecRequest updateRecRequest
     ) {
         updateRecService.execute(id, updateRecRequest);
         return ResponseEntity.noContent().build();
