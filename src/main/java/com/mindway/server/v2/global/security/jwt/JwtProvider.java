@@ -73,7 +73,7 @@ public class JwtProvider {
         try {
             Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(token);
 
-            return true;
+            return !redisUtil.hasKeyBlackList(token);
         } catch (ExpiredJwtException e) {
             throw new MindWayException(ErrorCode.EXPIRED_TOKEN);
         } catch (Exception e) {
