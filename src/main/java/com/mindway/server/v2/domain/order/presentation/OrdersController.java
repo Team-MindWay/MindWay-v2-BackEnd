@@ -25,21 +25,22 @@ public class OrdersController {
     private final GetBookOrdersService getBookOrdersService;
 
     @PostMapping
-    public ResponseEntity<Void> bookRequest
-            (@RequestBody @Valid OrderRequest bookRequest) {
+    public ResponseEntity<Void> bookRequest (@RequestBody @Valid OrderRequest bookRequest) {
         bookRequestService.execute(bookRequest);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
     @DeleteMapping("/{order_id}")
-    public ResponseEntity<Void> deleteBook (@PathVariable(value = "order_id") Long id) {
+    public ResponseEntity<Void> deleteBook (@PathVariable("order_id") Long id) {
         deleteBookOrderService.execute(id);
         return ResponseEntity.noContent().build();
     }
 
     @PatchMapping("/{order_id}")
-    public ResponseEntity<Void> updateBook
-            (@PathVariable(value = "order_id") Long id, @RequestBody @Valid OrderUpdateRequest orderUpdate) {
+    public ResponseEntity<Void> updateBook (
+        @PathVariable("order_id") Long id,
+        @RequestBody @Valid OrderUpdateRequest orderUpdate
+    ) {
         updateBookOrderService.execute(id, orderUpdate);
         return ResponseEntity.noContent().build();
     }
