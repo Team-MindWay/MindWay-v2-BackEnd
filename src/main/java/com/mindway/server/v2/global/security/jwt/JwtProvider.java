@@ -80,7 +80,6 @@ public class JwtProvider {
             throw new ExpiredTokenException();
         } catch (Exception e) {
             throw new InvalidTokenException();
-
         }
     }
 
