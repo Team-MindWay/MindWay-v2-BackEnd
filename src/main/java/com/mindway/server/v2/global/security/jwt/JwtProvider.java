@@ -1,5 +1,7 @@
 package com.mindway.server.v2.global.security.jwt;
 
+import com.mindway.server.v2.domain.auth.exception.ExpiredTokenException;
+import com.mindway.server.v2.domain.auth.exception.InvalidTokenException;
 import com.mindway.server.v2.domain.auth.presentation.dto.response.TokenResponse;
 import com.mindway.server.v2.global.auth.AuthDetailsService;
 import com.mindway.server.v2.global.exception.ErrorCode;
@@ -75,10 +77,9 @@ public class JwtProvider {
 
             return !redisUtil.hasKeyBlackList(token);
         } catch (ExpiredJwtException e) {
-            throw new MindWayException(ErrorCode.EXPIRED_TOKEN);
+            throw new ExpiredTokenException();
         } catch (Exception e) {
-            throw new MindWayException(ErrorCode.INVALID_TOKEN_TYPE);
-
+            throw new InvalidTokenException();
         }
     }
 
