@@ -1,4 +1,4 @@
-package com.mindway.server.v2.domain.notice.converter;
+package com.mindway.server.v2.domain.notice.util;
 
 
 import com.mindway.server.v2.domain.notice.entity.Notice;

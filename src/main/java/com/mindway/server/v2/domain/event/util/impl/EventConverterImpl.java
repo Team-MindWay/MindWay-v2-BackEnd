@@ -1,6 +1,6 @@
-package com.mindway.server.v2.domain.event.converter.impl;
+package com.mindway.server.v2.domain.event.util.impl;
 
-import com.mindway.server.v2.domain.event.converter.EventConverter;
+import com.mindway.server.v2.domain.event.util.EventConverter;
 import com.mindway.server.v2.domain.event.entity.Event;
 import com.mindway.server.v2.domain.event.entity.Status;
 import com.mindway.server.v2.domain.event.presentation.dto.request.EventUpdateRequestDto;
