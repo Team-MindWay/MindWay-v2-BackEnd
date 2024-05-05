@@ -1,4 +1,4 @@
-package com.mindway.server.v2.domain.event.converter;
+package com.mindway.server.v2.domain.event.util;
 
 import com.mindway.server.v2.domain.event.entity.Event;
 import com.mindway.server.v2.domain.event.entity.Status;

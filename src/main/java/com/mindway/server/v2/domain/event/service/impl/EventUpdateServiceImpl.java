@@ -1,10 +1,9 @@
 package com.mindway.server.v2.domain.event.service.impl;
 
-import com.mindway.server.v2.domain.event.converter.EventConverter;
+import com.mindway.server.v2.domain.event.util.EventConverter;
 import com.mindway.server.v2.domain.event.entity.Event;
 import com.mindway.server.v2.domain.event.entity.Status;
 import com.mindway.server.v2.domain.event.exception.InvalidStartAndEndDateException;
-import com.mindway.server.v2.domain.event.exception.InvalidUserEventException;
 import com.mindway.server.v2.domain.event.exception.NotFoundEventException;
 import com.mindway.server.v2.domain.event.presentation.dto.request.EventUpdateRequestDto;
 import com.mindway.server.v2.domain.event.repository.EventRepository;

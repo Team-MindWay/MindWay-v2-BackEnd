@@ -1,6 +1,6 @@
 package com.mindway.server.v2.domain.notice.service.impl;
 
-import com.mindway.server.v2.domain.notice.converter.NoticeConverter;
+import com.mindway.server.v2.domain.notice.util.NoticeConverter;
 import com.mindway.server.v2.domain.notice.entity.Notice;
 import com.mindway.server.v2.domain.notice.exception.NotAccessStudentException;
 import com.mindway.server.v2.domain.notice.presentation.dto.request.NoticeAddRequestDto;
