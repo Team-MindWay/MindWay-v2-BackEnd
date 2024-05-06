@@ -3,7 +3,9 @@ package com.mindway.server.v2.domain.rank.scheduler;
 import com.mindway.server.v2.domain.rank.service.DeleteRankService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.stereotype.Component;
 
+@Component
 @RequiredArgsConstructor
 public class RankScheduler {
 
