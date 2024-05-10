@@ -23,7 +23,6 @@ import org.springframework.web.filter.CorsFilter;
 @EnableWebSecurity
 public class SecurityConfig {
     private final JwtProvider jwtProvider;
-    private final CorsFilter corsFilter;
     private final JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
     private final JwtAccessDeniedHandler jwtAccessDeniedHandler;
 
@@ -31,7 +30,7 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
                 .csrf(AbstractHttpConfigurer::disable)
-                .addFilterBefore(corsFilter, UsernamePasswordAuthenticationFilter.class)
+                .cors(AbstractHttpConfigurer::disable)
 
                 .exceptionHandling(exceptionConfig ->
                         exceptionConfig.authenticationEntryPoint(jwtAuthenticationEntryPoint)
