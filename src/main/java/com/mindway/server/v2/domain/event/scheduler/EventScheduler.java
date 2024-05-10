@@ -13,12 +13,12 @@ public class EventScheduler {
     private final ChangeNowToPastService changeNowToPastService;
     private final ChangePendingToNowService changePendingToNowService;
 
-    @Scheduled(cron = "0 0 0 * *", zone = "Asia/Seoul")
+    @Scheduled(cron = "0 0 0 * * *", zone = "Asia/Seoul")
     public void changeNowToPast() {
         changeNowToPastService.execute();
     }
 
-    @Scheduled(cron = "0 0 0 * *", zone = "Asia/Seoul")
+    @Scheduled(cron = "0 0 0 * * *", zone = "Asia/Seoul")
     public void changePendingToNow() {
         changePendingToNowService.execute();
     }
