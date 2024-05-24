@@ -43,7 +43,10 @@ public enum ErrorCode {
     INVALID_USER_EVENT(400, "해당 이벤트를 등록한 유저가 아닙니다."),
 
     /* recommend */
-    NOT_FOUND_RECOMMEND_BOOK(404, "추천 도서를 찾을 수 없습니다.");
+    NOT_FOUND_RECOMMEND_BOOK(404, "추천 도서를 찾을 수 없습니다."),
+
+    /* server */
+    INTERNAL_SERVER_ERROR(500, "예기치 못한 서버 에러");
 
     private final int status;
     private final String message;
