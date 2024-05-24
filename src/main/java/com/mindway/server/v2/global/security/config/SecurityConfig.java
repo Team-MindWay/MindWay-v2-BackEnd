@@ -1,7 +1,10 @@
 package com.mindway.server.v2.global.security.config;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mindway.server.v2.domain.user.entity.Authority;
+import com.mindway.server.v2.global.security.filter.ExceptionFilter;
 import com.mindway.server.v2.global.security.filter.JwtFilter;
+import com.mindway.server.v2.global.security.filter.RequestLogFilter;
 import com.mindway.server.v2.global.security.handler.JwtAccessDeniedHandler;
 import com.mindway.server.v2.global.security.handler.JwtAuthenticationEntryPoint;
 import com.mindway.server.v2.global.security.jwt.JwtProvider;
@@ -25,6 +28,7 @@ public class SecurityConfig {
     private final JwtProvider jwtProvider;
     private final JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
     private final JwtAccessDeniedHandler jwtAccessDeniedHandler;
+    private final ObjectMapper objectMapper;
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
@@ -92,8 +96,15 @@ public class SecurityConfig {
                                 .requestMatchers(HttpMethod.GET, "/api/v2/recommend").authenticated()
 
                                 .anyRequest().denyAll()
+
+
+
+
                 )
 
+
+                .addFilterBefore(new RequestLogFilter(), UsernamePasswordAuthenticationFilter.class)
+                .addFilterBefore(new ExceptionFilter(objectMapper), UsernamePasswordAuthenticationFilter.class)
                 .addFilterBefore(new JwtFilter(jwtProvider), UsernamePasswordAuthenticationFilter.class);
 
 
