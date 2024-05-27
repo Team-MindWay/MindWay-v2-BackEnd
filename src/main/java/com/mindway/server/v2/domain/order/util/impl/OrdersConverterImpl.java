@@ -22,6 +22,7 @@ public class OrdersConverterImpl implements OrdersConverter {
     @Override
     public OrdersResponse toDto(Orders orders) {
         return OrdersResponse.builder()
+                .id(orders.getId())
                 .title(orders.getTitle())
                 .author(orders.getAuthor())
                 .book_url(orders.getBookURL())

@@ -24,8 +24,7 @@ public class GetBookOrdersServiceImpl implements GetBookOrdersService {
     public List<OrdersResponse> execute() {
         User user = userUtil.getCurrentUser();
 
-        if (user.getAuthority() != Authority.ROLE_TEACHER
-                && user.getAuthority() != Authority.ROLE_HELPER) {
+        if (user.getAuthority() == Authority.ROLE_STUDENT) {
             throw new NotAccessStudentException();
         }
 

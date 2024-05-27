@@ -6,6 +6,7 @@ import lombok.Getter;
 @Getter
 @Builder
 public class OrdersResponse {
+    private Long id;
     private String title;
     private String author;
     private String book_url;
