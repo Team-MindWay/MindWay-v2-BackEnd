@@ -1,16 +1,16 @@
-name: Build with Gradle and Upload DockerImage to DockerHub
+name: Build with Gradle and Run Docker Container
 
 on:
   push:
-    branches: ["154-githubactions-docker-release"]
+    branches: ["develop"]
   pull_request:
-    branches: ["154-githubactions-docker-release"]
+    branches: ["develop"]
 
 permissions:
   contents: read
 
 jobs:
-  build-docker-image:
+  build-and-run:
     runs-on: self-hosted
     steps:
       - uses: actions/checkout@v3
