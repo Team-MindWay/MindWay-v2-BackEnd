@@ -11,7 +11,7 @@ permissions:
 
 jobs:
   build-docker-image:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     steps:
       - uses: actions/checkout@v3
       - name: Set up JDK 17
@@ -27,33 +27,6 @@ jobs:
 
       - name: docker image build
         run: docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/mindway-v2-backend .
-
-      - name: tag docker image
-        run: docker tag ${{ secrets.DOCKERHUB_USERNAME }}/mindway-v2-backend ${{ secrets.DOCKERHUB_USERNAME }}/mindway-v2-backend:latest
-
-      - name: docker login
-        uses: docker/login-action@v2
-        with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_PASSWORD }}
-
-      - name: docker Hub push
-        run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/mindway-v2-backend
-
-  run-docker-image:
-    needs: build-docker-image
-    runs-on: self-hosted
-    steps:
-      - uses: actions/checkout@v3
-
-      - name: docker login
-        uses: docker/login-action@v2
-        with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_PASSWORD }}
-
-      - name: pull docker image with latest tag
-        run: sudo docker pull docker.io/${{ secrets.DOCKERHUB_USERNAME }}/mindway-v2-backend:latest
 
       - name: docker stop container
         run: sudo docker stop $(sudo docker ps -q) 2> /dev/null || true
