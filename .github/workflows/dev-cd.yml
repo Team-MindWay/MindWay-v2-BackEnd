@@ -44,11 +44,8 @@ jobs:
     needs: build-docker-image
     runs-on: self-hosted
     steps:
-      - name: Check Docker login status
-        run: sudo docker info
-
       - name: pull docker image with latest tag
-        run: sudo docker pull ${{ secrets.DOCKERHUB_USERNAME }}/mindway-v2-backend
+        run: docker pull ${{ secrets.DOCKERHUB_USERNAME }}/mindway-v2-backend
 
       - name: docker stop container
         run: sudo docker stop $(sudo docker ps -q) 2> /dev/null || true
