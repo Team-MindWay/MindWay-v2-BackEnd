@@ -53,7 +53,7 @@ jobs:
           password: ${{ secrets.DOCKERHUB_PASSWORD }}
 
       - name: pull docker image with latest tag
-        run: docker pull ${{ secrets.DOCKERHUB_USERNAME }}/mindway-v2-backend:latest
+        run: sudo docker pull ${{ secrets.DOCKERHUB_USERNAME }}/mindway-v2-backend:latest
 
       - name: docker stop container
         run: sudo docker stop $(sudo docker ps -q) 2> /dev/null || true
