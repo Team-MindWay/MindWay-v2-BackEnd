@@ -25,6 +25,9 @@ jobs:
         with:
           arguments: clean bootJar
 
+      - name: tag docker image
+        run: docker tag ${{ secrets.DOCKERHUB_USERNAME }}/mindway-v2-backend ${{ secrets.DOCKERHUB_USERNAME }}/mindway-v2-backend:latest
+
       - name: docker image build
         run: docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/mindway-v2-backend .
 
@@ -41,14 +44,25 @@ jobs:
     needs: build-docker-image
     runs-on: self-hosted
     steps:
+      - name: Check current user
+        run: whoami
+
+      - name: Add user to Docker group
+        run: |
+          sudo usermod -aG docker $(whoami)
+          newgrp docker
+
       - name: docker login
         uses: docker/login-action@v2
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_PASSWORD }}
 
-      - name: docker pull
-        run: sudo docker pull ${{ secrets.DOCKERHUB_USERNAME }}/mindway-v2-backend
+      - name: Check Docker login status
+        run: sudo docker info
+
+      - name: pull docker image with latest tag
+        run: sudo docker pull ${{ secrets.DOCKERHUB_USERNAME }}/mindway-v2-backend:latest
 
       - name: docker stop container
         run: sudo docker stop $(sudo docker ps -q) 2> /dev/null || true
