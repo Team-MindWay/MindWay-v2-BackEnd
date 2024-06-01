@@ -26,7 +26,7 @@ jobs:
           arguments: clean bootJar
 
       - name: docker image build
-        run: docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/mindway-v2-backend .
+        run: sudo docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/mindway-v2-backend .
 
       - name: docker stop container
         run: sudo docker stop $(sudo docker ps -q) 2> /dev/null || true
