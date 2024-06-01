@@ -25,6 +25,7 @@ public class GetMyOrdersServiceImpl implements GetMyOrdersService {
 
         return ordersList.stream()
                 .map(orders -> MyOrdersResponse.builder()
+                        .id(orders.getId())
                         .title(orders.getTitle())
                         .author(orders.getAuthor())
                         .build())
