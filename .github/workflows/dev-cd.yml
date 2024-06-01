@@ -25,11 +25,11 @@ jobs:
         with:
           arguments: clean bootJar
 
-      - name: tag docker image
-        run: docker tag ${{ secrets.DOCKERHUB_USERNAME }}/mindway-v2-backend ${{ secrets.DOCKERHUB_USERNAME }}/mindway-v2-backend:latest
-
       - name: docker image build
         run: docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/mindway-v2-backend .
+
+      - name: tag docker image
+        run: docker tag ${{ secrets.DOCKERHUB_USERNAME }}/mindway-v2-backend ${{ secrets.DOCKERHUB_USERNAME }}/mindway-v2-backend:latest
 
       - name: docker login
         uses: docker/login-action@v2
