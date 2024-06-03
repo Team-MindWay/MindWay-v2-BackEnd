@@ -32,10 +32,16 @@ jobs:
         run: sudo docker build -t mindway-v2-backend .
 
       - name: docker stop container
-        run: sudo docker stop $(sudo docker ps -q) 2> /dev/null || true
+        run: |
+          for container in $(sudo docker ps -q); do
+            name=$(sudo docker inspect --format='{{.Name}}' $container)
+            if [ "$name" != "/dozzle" ]; then
+              sudo docker stop $container
+            fi
+          done
 
       - name: docker run new container
         run: sudo docker run --name mindwayv2container --env-file /home/minjun/.env --rm -d -p 10000:8080 mindway-v2-backend
 
       - name: delete old docker image
-        run: sudo docker system prune -f
+        run: sudo docker system prune -f --filter "label!=dozzle"
