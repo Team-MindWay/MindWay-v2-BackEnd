@@ -25,6 +25,9 @@ jobs:
         with:
           arguments: clean bootJar
 
+      - name: sudo su
+        run: sudo su && echo -n ${{ secrets.SELFHOSTED_PASSWORD }} | sudo -S
+
       - name: docker image build
         run: sudo docker build -t mindway-v2-backend .
 
