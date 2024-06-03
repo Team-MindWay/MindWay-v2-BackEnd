@@ -5,6 +5,6 @@ import com.mindway.server.v2.global.exception.MindWayException;
 
 public class NotExistGoalException extends MindWayException {
     public NotExistGoalException() {
-        super(ErrorCode.EXIST_ALREADY_GOAL);
+        super(ErrorCode.NOT_EXIST_GOAL);
     }
 }
