@@ -36,7 +36,7 @@ public class EventWriteServiceImpl implements EventWriteService {
         if (user.getAuthority() == Authority.ROLE_STUDENT)
             throw new NotAccessStudentException();
 
-        Status status = checkDate(eventWriteRequestDto.getCreated_at(), eventWriteRequestDto.getEnded_at());
+        Status status = checkDate(eventWriteRequestDto.getStarted_at(), eventWriteRequestDto.getEnded_at());
 
         String image_url = s3Util.imageUpload(image);
 
