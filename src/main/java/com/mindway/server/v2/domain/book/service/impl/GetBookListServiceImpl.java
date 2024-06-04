@@ -25,10 +25,6 @@ public class GetBookListServiceImpl implements GetBookListService {
         User user = userUtil.getCurrentUser();
         List<Book> books = bookRepository.findAllByUser(user);
 
-        if (user != books.get(0).getUser()) {
-            throw new NotSameAuthorException();
-        }
-
         return books.stream()
                 .map(bookConverter::toListDto)
                 .collect(Collectors.toList());
