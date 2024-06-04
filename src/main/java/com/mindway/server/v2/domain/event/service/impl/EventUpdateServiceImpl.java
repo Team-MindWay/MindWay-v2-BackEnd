@@ -42,7 +42,7 @@ public class EventUpdateServiceImpl implements EventUpdateService {
 
         String img_url = s3Util.imageUpload(image);
 
-        Status status = checkDate(eventUpdateRequestDto.getCreated_at(), eventUpdateRequestDto.getEnded_at());
+        Status status = checkDate(eventUpdateRequestDto.getStarted_at(), eventUpdateRequestDto.getEnded_at());
 
         Event event = eventConverter.toUpdateEntity(eventId, eventUpdateRequestDto, user, img_url, status);
 

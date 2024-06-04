@@ -13,8 +13,8 @@ public class EventUpdateRequestDto {
     @NotNull
     private String content;
     @NotNull
-    @Pattern(regexp = "\\d{4}-\\d{2}-\\d{2}", message = "created_at의 형식이 yyyy-MM-dd가 아닙니다.")
-    private String created_at;
+    @Pattern(regexp = "\\d{4}-\\d{2}-\\d{2}", message = "started_at의 형식이 yyyy-MM-dd가 아닙니다.")
+    private String started_at;
     @NotNull
     @Pattern(regexp = "\\d{4}-\\d{2}-\\d{2}", message = "ended_at의 형식이 yyyy-MM-dd가 아닙니다.")
     private String ended_at;
