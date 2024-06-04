@@ -15,7 +15,7 @@ public class EventWriteRequestDto {
     @NotNull
     private String content;
     @NotNull
-    private String created_at;
+    private String started_at;
     @NotNull
     private String ended_at;
 }
