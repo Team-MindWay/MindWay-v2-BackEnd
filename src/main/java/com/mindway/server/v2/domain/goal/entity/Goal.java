@@ -34,4 +34,8 @@ public class Goal {
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
+
+    public void accrue() {
+        now_count++;
+    }
 }
