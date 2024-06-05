@@ -29,11 +29,8 @@ public class EventController {
     private final EventUpdateService eventUpdateService;
 
     @PostMapping
-    public ResponseEntity<Void> writeEvent(
-        @Valid @RequestPart("dto") EventWriteRequestDto eventWriteRequestDto,
-        @RequestPart(required = false) MultipartFile image
-    ) {
-        eventWriteService.execute(eventWriteRequestDto, image);
+    public ResponseEntity<Void> writeEvent(@Valid @RequestBody EventWriteRequestDto eventWriteRequestDto) {
+        eventWriteService.execute(eventWriteRequestDto);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 

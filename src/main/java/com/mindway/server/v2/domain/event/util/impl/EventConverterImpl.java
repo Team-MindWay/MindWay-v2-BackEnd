@@ -14,13 +14,13 @@ import java.time.LocalDate;
 
 @Component
 public class EventConverterImpl implements EventConverter {
-    public Event toEntity(EventWriteRequestDto eventWriteRequestDto, User user, String image_url, Status status) {
+    public Event toEntity(EventWriteRequestDto eventWriteRequestDto, User user, Status status) {
         return Event.builder()
                 .title(eventWriteRequestDto.getTitle())
                 .content(eventWriteRequestDto.getContent())
                 .started_at(LocalDate.parse(eventWriteRequestDto.getStarted_at()))
                 .ended_at(LocalDate.parse(eventWriteRequestDto.getEnded_at()))
-                .img_url(image_url)
+                .img_url(eventWriteRequestDto.getImg_url())
                 .status(status)
                 .user(user)
                 .build();
