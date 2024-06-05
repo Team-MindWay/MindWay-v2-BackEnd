@@ -15,6 +15,6 @@ public class EventWriteRequestDto {
     private String started_at;
     @NotNull
     private String ended_at;
-    @NotNull
+
     private String img_url = "";
 }
