@@ -40,6 +40,9 @@ jobs:
             fi
           done
 
+      - name: delete old docker container
+        run: sudo docker rm mindwayv2container
+
       - name: docker run new container
         run: sudo docker run --name mindwayv2container --env-file /home/minjun/.env --rm -d -p 10000:8080 mindway-v2-backend
 
