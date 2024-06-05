@@ -96,6 +96,9 @@ public class SecurityConfig {
                                 .requestMatchers(HttpMethod.DELETE, "/api/v2/recommend/{rec_id}").hasAnyAuthority(Authority.ROLE_TEACHER.name(), Authority.ROLE_HELPER.name())
                                 .requestMatchers(HttpMethod.GET, "/api/v2/recommend").authenticated()
 
+                                // image
+                                .requestMatchers(HttpMethod.POST, "/api/v2/image").hasAnyAuthority(Authority.ROLE_TEACHER.name(), Authority.ROLE_HELPER.name())
+
                                 .anyRequest().denyAll()
 
 
