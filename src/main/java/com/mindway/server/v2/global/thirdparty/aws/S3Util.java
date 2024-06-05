@@ -49,4 +49,9 @@ public class S3Util {
         amazonS3.putObject(bucket, profileName, file.getInputStream(), metadata);
         return amazonS3.getUrl(bucket, profileName).toString();
     }
+
+    public void deleteImage(String url) {
+        String key = url.split("com/")[1];
+        amazonS3.deleteObject(bucket, key);
+    }
 }
