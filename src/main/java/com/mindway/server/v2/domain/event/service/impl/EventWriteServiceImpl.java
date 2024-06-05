@@ -26,11 +26,10 @@ import java.util.Date;
 public class EventWriteServiceImpl implements EventWriteService {
 
     private final EventRepository eventRepository;
-    private final S3Util s3Util;
     private final UserUtil userUtil;
     private final EventConverter eventConverter;
 
-    public void execute(EventWriteRequestDto eventWriteRequestDto, MultipartFile image) {
+    public void execute(EventWriteRequestDto eventWriteRequestDto) {
         User user = userUtil.getCurrentUser();
 
         if (user.getAuthority() == Authority.ROLE_STUDENT)
@@ -38,9 +37,7 @@ public class EventWriteServiceImpl implements EventWriteService {
 
         Status status = checkDate(eventWriteRequestDto.getStarted_at(), eventWriteRequestDto.getEnded_at());
 
-        String image_url = s3Util.imageUpload(image);
-
-        Event event = eventConverter.toEntity(eventWriteRequestDto, user, image_url, status);
+        Event event = eventConverter.toEntity(eventWriteRequestDto, user, eventWriteRequestDto.getImg_url(), status);
 
         eventRepository.save(event);
     }
