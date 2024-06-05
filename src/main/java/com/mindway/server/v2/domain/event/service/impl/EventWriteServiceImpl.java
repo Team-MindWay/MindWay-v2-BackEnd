@@ -37,7 +37,7 @@ public class EventWriteServiceImpl implements EventWriteService {
 
         Status status = checkDate(eventWriteRequestDto.getStarted_at(), eventWriteRequestDto.getEnded_at());
 
-        Event event = eventConverter.toEntity(eventWriteRequestDto, user, eventWriteRequestDto.getImg_url(), status);
+        Event event = eventConverter.toEntity(eventWriteRequestDto, user, status);
 
         eventRepository.save(event);
     }
