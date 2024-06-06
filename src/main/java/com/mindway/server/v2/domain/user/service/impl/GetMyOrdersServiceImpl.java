@@ -28,6 +28,7 @@ public class GetMyOrdersServiceImpl implements GetMyOrdersService {
                         .id(orders.getId())
                         .title(orders.getTitle())
                         .author(orders.getAuthor())
+                        .book_url(orders.getBookURL())
                         .build())
                 .collect(Collectors.toList());
     }
