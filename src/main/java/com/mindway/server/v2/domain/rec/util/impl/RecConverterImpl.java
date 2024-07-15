@@ -24,7 +24,7 @@ public class RecConverterImpl implements RecConverter {
                 .id(rec.getId())
                 .title(rec.getTitle())
                 .content(rec.getContent())
-                .author(rec.getContent())
+                .author(rec.getAuthor())
                 .build();
     }
 }
