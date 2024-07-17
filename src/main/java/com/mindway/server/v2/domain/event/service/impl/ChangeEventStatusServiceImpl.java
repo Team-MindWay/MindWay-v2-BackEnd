@@ -8,13 +8,10 @@ import com.mindway.server.v2.global.annotation.ServiceWithTransaction;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.util.Date;
+import java.time.ZoneId;
 import java.util.List;
 import java.util.Objects;
-
 
 @ServiceWithTransaction
 @RequiredArgsConstructor
@@ -22,6 +19,7 @@ import java.util.Objects;
 public class ChangeEventStatusServiceImpl implements ChangeEventStatusService {
 
     private final EventRepository eventRepository;
+    private final ZoneId zoneId = ZoneId.of("Asia/Seoul");
 
     public void execute() {
         log.info("===================이벤트 스케줄러 시작===================");
@@ -34,8 +32,10 @@ public class ChangeEventStatusServiceImpl implements ChangeEventStatusService {
     }
 
     private void saveChangePast(List<Event> nowEvents) {
-        for (Event event: nowEvents) {
-            if (Objects.equals(event.getStarted_at(), LocalDate.now())) {
+        LocalDate now = LocalDate.now(zoneId);
+
+        for (Event event : nowEvents) {
+            if (Objects.equals(event.getStarted_at(), now)) {
                 event.changeStatus(Status.PAST);
                 eventRepository.save(event);
                 log.info("EventId: {}, status: NOW -> PAST", event.getId());
@@ -45,21 +45,17 @@ public class ChangeEventStatusServiceImpl implements ChangeEventStatusService {
     }
 
     private void saveChangeNow(List<Event> pendingEvents) {
-        try {
+        LocalDate now = LocalDate.now(zoneId);
 
-            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-            Date now = formatter.parse(String.valueOf(LocalDate.now()));
+        for (Event event : pendingEvents) {
+            LocalDate endDate = event.getEnded_at();
 
-            for (Event event: pendingEvents) {
-                Date endDate = formatter.parse(String.valueOf(event.getEnded_at()));
-
-                if (now.after(endDate)) {
-                    event.changeStatus(Status.NOW);
-                    eventRepository.save(event);
-                    log.info("EventId: {}, status: PENDING -> NOW", event.getId());
-                }
+            if (now.isAfter(endDate)) {
+                event.changeStatus(Status.NOW);
+                eventRepository.save(event);
+                log.info("EventId: {}, status: PENDING -> NOW", event.getId());
             }
-            log.info("===================EventPendingToNow End===================");
-        } catch (ParseException e) {}
+        }
+        log.info("===================EventPendingToNow End===================");
     }
 }
