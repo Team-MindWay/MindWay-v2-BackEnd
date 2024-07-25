@@ -16,7 +16,7 @@ import lombok.RequiredArgsConstructor;
 public class DeleteRecServiceImpl implements DeleteRecService {
 
     private final RecRepository recRepository;
-    private UserUtil userUtil;
+    private final UserUtil userUtil;
 
     public void execute(Long id) {
         User user = userUtil.getCurrentUser();
