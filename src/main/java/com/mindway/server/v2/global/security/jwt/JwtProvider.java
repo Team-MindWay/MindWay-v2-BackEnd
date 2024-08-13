@@ -37,8 +37,8 @@ import static com.mindway.server.v2.global.security.filter.JwtFilter.BEARER_PREF
 public class JwtProvider {
     private static final String AUTHORITIES_KEY = "auth";
     private static final String BEARER_TYPE = "Bearer ";
-    private static final long ACCESS_TOKEN_TIME = 1000 * 60 * 30L;
-    private static final long REFRESH_TOKEN_TIME = 1000 * 60 * 60 * 24 * 7L;
+    private static final long ACCESS_TOKEN_TIME = 60L * 30 * 4;
+    private static final long REFRESH_TOKEN_TIME = 60L * 60 * 24 * 7;
 
     @Value("${jwt.secret}")
     private String secretKey;
