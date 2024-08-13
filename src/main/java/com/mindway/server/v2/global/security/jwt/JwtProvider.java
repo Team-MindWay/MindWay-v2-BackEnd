@@ -39,6 +39,7 @@ public class JwtProvider {
     private static final String BEARER_TYPE = "Bearer ";
     private static final long ACCESS_TOKEN_TIME = 1000 * 60 * 30L;
     private static final long REFRESH_TOKEN_TIME = 1000 * 60 * 60 * 24 * 7L;
+    private static final long ACCESS_TOKEN_TIME = 60L * 30 * 4;
 
     @Value("${jwt.secret}")
     private String secretKey;
