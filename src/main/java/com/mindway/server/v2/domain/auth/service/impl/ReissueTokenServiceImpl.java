@@ -33,4 +33,14 @@ public class ReissueTokenServiceImpl implements ReissueTokenService {
 
         return jwtProvider.generateTokenDto(user.getId());
     }
+
+    private void saveRefreshToken(String refreshToken, UUID memberId, LocalDateTime expiredAt) {
+        RefreshToken token = RefreshToken.builder()
+                .refreshToken(refreshToken)
+                .memberId(memberId)
+                .expiredAt(expiredAt)
+                .build();
+
+        refreshRepository.save(token);
+    }
 }
