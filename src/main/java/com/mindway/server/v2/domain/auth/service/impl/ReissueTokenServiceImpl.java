@@ -12,6 +12,9 @@ import com.mindway.server.v2.global.annotation.ServiceWithTransaction;
 import com.mindway.server.v2.global.security.jwt.JwtProvider;
 import lombok.RequiredArgsConstructor;
 
+import java.time.LocalDateTime;
+import java.util.UUID;
+
 @RequiredArgsConstructor
 @ServiceWithTransaction
 public class ReissueTokenServiceImpl implements ReissueTokenService {
@@ -31,7 +34,11 @@ public class ReissueTokenServiceImpl implements ReissueTokenService {
 
         refreshRepository.deleteById(refreshEntity.getRefreshToken());
 
-        return jwtProvider.generateTokenDto(user.getId());
+        TokenResponse tokenResponse = jwtProvider.generateTokenDto(user.getId());
+
+        saveRefreshToken(tokenResponse.getRefreshToken(), user.getId(), tokenResponse.getRefreshTokenExpiresIn());
+
+        return tokenResponse;
     }
 
     private void saveRefreshToken(String refreshToken, UUID memberId, LocalDateTime expiredAt) {
