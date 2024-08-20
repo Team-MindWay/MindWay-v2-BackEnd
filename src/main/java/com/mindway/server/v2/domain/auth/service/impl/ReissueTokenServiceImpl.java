@@ -32,8 +32,6 @@ public class ReissueTokenServiceImpl implements ReissueTokenService {
         User user = userRepository.findById(refreshEntity.getMemberId())
                 .orElseThrow(UserNotFoundException::new);
 
-        refreshRepository.deleteById(refreshEntity.getRefreshToken());
-
         TokenResponse tokenResponse = jwtProvider.generateTokenDto(user.getId());
 
         saveRefreshToken(tokenResponse.getRefreshToken(), user.getId(), tokenResponse.getRefreshTokenExpiresIn());
