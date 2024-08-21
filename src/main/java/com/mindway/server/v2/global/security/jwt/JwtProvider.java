@@ -119,9 +119,7 @@ public class JwtProvider {
     }
 
     public String generateAccessToken(UUID id) {
-        long now = (new Date()).getTime();
-
-        Date accessTokenExpiresIn = new Date(now + ACCESS_TOKEN_TIME);
+        Date accessTokenExpiresIn = new Date(System.currentTimeMillis() + ACCESS_TOKEN_TIME * 1000);
 
         return Jwts.builder()
                 .setSubject(id.toString())
@@ -133,9 +131,7 @@ public class JwtProvider {
     }
 
     public String generateRefreshToken(UUID id) {
-        long now = (new Date()).getTime();
-
-        Date refreshTokenExpiresIn = new Date(now + REFRESH_TOKEN_TIME);
+        Date refreshTokenExpiresIn = new Date(System.currentTimeMillis() + REFRESH_TOKEN_TIME * 1000);
 
         return Jwts.builder()
                 .setSubject(id.toString())
