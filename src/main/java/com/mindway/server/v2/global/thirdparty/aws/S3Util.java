@@ -28,7 +28,7 @@ public class S3Util {
 
             String[] splitFile = image.getOriginalFilename().split("\\.");
 
-            if (splitFile.length < 2)
+            if (splitFile.length =! 2)
                 throw new FileExtensionInvalidException();
 
             String extension = splitFile[1].toLowerCase();
