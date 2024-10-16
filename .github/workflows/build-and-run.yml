@@ -39,7 +39,7 @@ jobs:
           done
 
       - name: docker run new container
-        run: sudo docker run --name mindwayv2container --env-file /root/.env --rm -d -p 8080:8080 mindway-v2-backend
+        run: sudo docker run --name mindwayv2container --env-file /root/.env --rm -d -p 10000:8080 mindway-v2-backend
 
       - name: delete old docker image
         run: sudo docker system prune -f --filter "label!=dozzle"
