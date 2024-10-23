@@ -13,14 +13,12 @@ import com.mindway.server.v2.domain.user.repository.UserRepository;
 import com.mindway.server.v2.global.annotation.ServiceWithTransaction;
 import com.mindway.server.v2.global.security.jwt.JwtProvider;
 import gauth.GAuth;
-import gauth.GAuthToken;
-import gauth.GAuthUserInfo;
 import gauth.exception.GAuthException;
+import gauth.response.GAuthToken;
+import gauth.response.GAuthUserInfo;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 
-import java.io.IOException;
 import java.util.Objects;
 import java.util.UUID;
 
