@@ -32,7 +32,7 @@ dependencies {
 	implementation("org.mariadb.jdbc:mariadb-java-client:3.3.3")
 
 	// GAuth
-	implementation("com.github.GSM-MSG:GAuth-SDK-Java:v3.0.0")
+	implementation("com.github.GSM-MSG:GAuth-SDK-Java:v3.0.1")
 
 	// jwt
 	implementation("io.jsonwebtoken:jjwt-api:0.11.5")
